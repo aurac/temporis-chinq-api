@@ -11,6 +11,7 @@ use App\Repository\ItemRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -18,7 +19,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ApiResource(
  *     collectionOperations={"get", "post"},
  *     itemOperations={
- *          "get"={},
+ *          "get"={
+ *              "normalization_context"={"groups"={"item:read", "item:item:get"}}
+ *     },
  *          "put"
  *     },
  *     normalizationContext={"groups"={"item:read"}, "swagger_definition_name"="Read"},
@@ -30,9 +33,15 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     }
  * )
  * @ORM\Entity(repositoryClass=ItemRepository::class)
- * @ApiFilter(SearchFilter::class, properties={"name": "partial", "level": "exact"})
+ * @ApiFilter(SearchFilter::class, properties={
+ *     "name": "partial",
+ *     "level": "exact",
+ *     "recipes.cards.name": "partial",
+ *     "recipes.cards.number": "exact"
+ * })
  * @ApiFilter(RangeFilter::class, properties={"level"})
  * @ApiFilter(PropertyFilter::class)
+ * @UniqueEntity(fields={"name"})
  */
 class Item
 {
@@ -46,7 +55,7 @@ class Item
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"item:read", "item:write", "card:read"})
+     * @Groups({"item:read", "item:write", "card:read", "recipe:read"})
      * @Assert\NotBlank()
      * @Assert\Length(
      *     min=2,
@@ -58,7 +67,7 @@ class Item
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups({"item:read", "item:write", "card:read"})
+     * @Groups({"item:read", "item:write", "card:read", "recipe:read"})
      * @Assert\NotBlank
      * @Assert\GreaterThan(0)
      */
@@ -66,14 +75,14 @@ class Item
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"item:read", "item:write", "card:read"})
+     * @Groups({"item:read", "item:write", "card:read", "recipe:read"})
      */
     private $link;
 
     /**
      * @ORM\ManyToOne(targetEntity=SubType::class, inversedBy="items")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"item:read", "item:write", "card:read"})
+     * @Groups({"item:read", "item:write", "card:read", "recipe:read"})
      */
     private $subType;
 

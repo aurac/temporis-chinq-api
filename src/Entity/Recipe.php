@@ -2,12 +2,15 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Serializer\Filter\PropertyFilter;
 use App\Repository\RecipeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource(
@@ -21,6 +24,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *     shortName="recipes"
  * )
  * @ORM\Entity(repositoryClass=RecipeRepository::class)
+ * @ApiFilter(PropertyFilter::class)
  */
 class Recipe
 {
@@ -28,20 +32,21 @@ class Recipe
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"card:read", "item:read"})
+     * @Groups({"recipe:read", "card:read", "item:read"})
      */
     private $id;
 
     /**
      * @ORM\ManyToOne(targetEntity=Item::class, inversedBy="recipes")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"recipe:write", "card:read"})
+     * @Groups({"recipe:read", "recipe:write", "card:read"})
      */
     private $item;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Card::class, inversedBy="recipes")
-     * @Groups({"recipe:write", "item:read"})
+     * @ORM\ManyToMany(targetEntity=Card::class, inversedBy="recipes", cascade={"persist"})
+     * @Groups({"recipe:read", "recipe:write", "item:read"})
+     * @Assert\Valid()
      */
     private $cards;
 

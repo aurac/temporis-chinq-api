@@ -4,13 +4,16 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Core\Serializer\Filter\PropertyFilter;
 use App\Repository\CardRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\SerializedName;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource(
@@ -25,6 +28,9 @@ use Symfony\Component\Serializer\Annotation\SerializedName;
  * )
  * @ORM\Entity(repositoryClass=CardRepository::class)
  * @ApiFilter(PropertyFilter::class)
+ * @ApiFilter(SearchFilter::class, properties={"recipes.item.name":"partial"})
+ * @UniqueEntity(fields={"number"})
+ * @UniqueEntity(fields={"name"})
  */
 class Card
 {
@@ -38,25 +44,30 @@ class Card
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups({"card:read", "card:write", "item:read"})
+     * @Groups({"card:read", "card:write", "item:read", "recipe:write", "recipe:read"})
+     * @Assert\NotBlank
+     * @Assert\GreaterThan(0)
      */
     private $number;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"card:read", "card:write", "item:read"})
+     * @Groups({"card:read", "card:write", "item:read", "recipe:write", "recipe:read"})
+     * @Assert\NotBlank
      */
     private $name;
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups({"card:read", "card:write", "item:read"})
+     * @Groups({"card:read", "card:write", "item:read", "recipe:write", "recipe:read"})
+     * @Assert\GreaterThan(0)
+     * @Assert\NotBlank
      */
     private $level;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"card:read", "card:write", "item:read"})
+     * @Groups({"card:read", "card:write", "item:read", "recipe:write", "recipe:read"})
      */
     private $description;
 
