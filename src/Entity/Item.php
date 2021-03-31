@@ -79,7 +79,7 @@ class Item
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"item:read", "item:write", "card:read", "recipe:read"})
      */
-    private string $link;
+    private ?string $link;
 
     /**
      * @ORM\ManyToOne(targetEntity=SubType::class, inversedBy="items")
@@ -97,7 +97,7 @@ class Item
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private string $imgLink;
+    private ?string $imgLink;
 
     public function __construct()
     {
