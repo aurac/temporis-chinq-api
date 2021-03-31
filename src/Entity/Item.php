@@ -93,7 +93,7 @@ class Item
      * @ORM\OneToMany(targetEntity=Recipe::class, mappedBy="item")
      * @Groups({"item:read"})
      */
-    private ArrayCollection $recipes;
+    private Collection $recipes;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)

@@ -34,21 +34,21 @@ class Recipe
      * @ORM\Column(type="integer")
      * @Groups({"recipe:read", "card:read", "item:read"})
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\ManyToOne(targetEntity=Item::class, inversedBy="recipes")
      * @ORM\JoinColumn(nullable=false)
      * @Groups({"recipe:read", "recipe:write", "card:read"})
      */
-    private $item;
+    private Item $item;
 
     /**
      * @ORM\ManyToMany(targetEntity=Card::class, inversedBy="recipes", cascade={"persist"})
      * @Groups({"recipe:read", "recipe:write", "item:read"})
      * @Assert\Valid()
      */
-    private $cards;
+    private Collection $cards;
 
     public function __construct()
     {
