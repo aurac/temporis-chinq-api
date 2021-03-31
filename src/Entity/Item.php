@@ -39,7 +39,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     "recipes.cards.name": "partial",
  *     "recipes.cards.number": "exact",
  *     "subType.type.id": "exact",
- *     "subType.id": "exact"
+ *     "subType.id": "exact",
+ *     "recipes.cards.id": "exact"
  * })
  * @ApiFilter(RangeFilter::class, properties={"level"})
  * @ApiFilter(PropertyFilter::class)
