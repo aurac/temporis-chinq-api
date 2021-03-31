@@ -2,12 +2,17 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\RangeFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Core\Serializer\Filter\PropertyFilter;
 use App\Repository\ItemRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource(
@@ -18,9 +23,16 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *     },
  *     normalizationContext={"groups"={"item:read"}, "swagger_definition_name"="Read"},
  *     denormalizationContext={"groups"={"item:write"}},
- *     shortName="items"
+ *     shortName="items",
+ *     attributes={
+ *          "pagination_items_per_page"=30,
+ *          "formats"={"jsonld", "html", "json", "jsonhal", "csv"={"text/csv"}}
+ *     }
  * )
  * @ORM\Entity(repositoryClass=ItemRepository::class)
+ * @ApiFilter(SearchFilter::class, properties={"name": "partial", "level": "exact"})
+ * @ApiFilter(RangeFilter::class, properties={"level"})
+ * @ApiFilter(PropertyFilter::class)
  */
 class Item
 {
@@ -34,26 +46,34 @@ class Item
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"item:read", "card:read"})
+     * @Groups({"item:read", "item:write", "card:read"})
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *     min=2,
+     *     max=50,
+     *     maxMessage="Name must have a 50 chars max length"
+     * )
      */
     private $name;
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups({"item:read", "card:read"})
+     * @Groups({"item:read", "item:write", "card:read"})
+     * @Assert\NotBlank
+     * @Assert\GreaterThan(0)
      */
     private $level;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"item:read", "card:read"})
+     * @Groups({"item:read", "item:write", "card:read"})
      */
     private $link;
 
     /**
      * @ORM\ManyToOne(targetEntity=SubType::class, inversedBy="items")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"item:read", "card:read"})
+     * @Groups({"item:read", "item:write", "card:read"})
      */
     private $subType;
 
@@ -63,9 +83,10 @@ class Item
      */
     private $recipes;
 
-    public function __construct()
+    public function __construct(string $name = null)
     {
         $this->recipes = new ArrayCollection();
+        $this->name= $name;
     }
 
     public function getId(): ?int
@@ -76,13 +97,6 @@ class Item
     public function getName(): ?string
     {
         return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
     }
 
     public function getLevel(): ?int

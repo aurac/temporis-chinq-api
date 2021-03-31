@@ -35,13 +35,13 @@ class Recipe
     /**
      * @ORM\ManyToOne(targetEntity=Item::class, inversedBy="recipes")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"card:read"})
+     * @Groups({"recipe:write", "card:read"})
      */
     private $item;
 
     /**
      * @ORM\ManyToMany(targetEntity=Card::class, inversedBy="recipes")
-     * @Groups({"item:read"})
+     * @Groups({"recipe:write", "item:read"})
      */
     private $cards;
 
