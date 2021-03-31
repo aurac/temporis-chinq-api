@@ -92,6 +92,11 @@ class Item
      */
     private $recipes;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $imgLink;
+
     public function __construct(string $name = null)
     {
         $this->recipes = new ArrayCollection();
@@ -106,6 +111,13 @@ class Item
     public function getName(): ?string
     {
         return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
     }
 
     public function getLevel(): ?int
@@ -170,6 +182,18 @@ class Item
                 $recipe->setItem(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getImgLink(): ?string
+    {
+        return $this->imgLink;
+    }
+
+    public function setImgLink(?string $imgLink): self
+    {
+        $this->imgLink = $imgLink;
 
         return $this;
     }
