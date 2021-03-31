@@ -37,7 +37,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     "name": "partial",
  *     "level": "exact",
  *     "recipes.cards.name": "partial",
- *     "recipes.cards.number": "exact"
+ *     "recipes.cards.number": "exact",
+ *     "subType.type.id": "exact",
+ *     "subType.id": "exact"
  * })
  * @ApiFilter(RangeFilter::class, properties={"level"})
  * @ApiFilter(PropertyFilter::class)
@@ -51,7 +53,7 @@ class Item
      * @ORM\Column(type="integer")
      * @Groups({"item:read", "card:read"})
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -63,7 +65,7 @@ class Item
      *     maxMessage="Name must have a 50 chars max length"
      * )
      */
-    private $name;
+    private string $name;
 
     /**
      * @ORM\Column(type="integer")
@@ -71,36 +73,35 @@ class Item
      * @Assert\NotBlank
      * @Assert\GreaterThan(0)
      */
-    private $level;
+    private int $level;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"item:read", "item:write", "card:read", "recipe:read"})
      */
-    private $link;
+    private string $link;
 
     /**
      * @ORM\ManyToOne(targetEntity=SubType::class, inversedBy="items")
      * @ORM\JoinColumn(nullable=false)
      * @Groups({"item:read", "item:write", "card:read", "recipe:read"})
      */
-    private $subType;
+    private SubType $subType;
 
     /**
      * @ORM\OneToMany(targetEntity=Recipe::class, mappedBy="item")
      * @Groups({"item:read"})
      */
-    private $recipes;
+    private ArrayCollection $recipes;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $imgLink;
+    private string $imgLink;
 
-    public function __construct(string $name = null)
+    public function __construct()
     {
         $this->recipes = new ArrayCollection();
-        $this->name= $name;
     }
 
     public function getId(): ?int
