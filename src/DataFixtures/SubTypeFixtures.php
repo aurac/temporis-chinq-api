@@ -101,11 +101,19 @@ class SubTypeFixtures extends Fixture implements DependentFixtureInterface
                 'bagpack',
                 'belt',
                 'boots',
-                'cap',
+                'cloak',
                 'helmet',
                 'ring',
                 'dofus',
-                'trophy'
+                'trophy',
+                'wand',
+                'staff',
+                'axe',
+                'shield',
+                'living_object',
+            ],
+            TypeFixtures::TYPE_RESOURCE => [
+                'idole'
             ]
         ];
     }

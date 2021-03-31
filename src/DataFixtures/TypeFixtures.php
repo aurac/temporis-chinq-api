@@ -18,6 +18,7 @@ class TypeFixtures extends Fixture
 {
     const TYPE_CONSUMABLE = 'consumable';
     const TYPE_STUFF = 'stuff';
+    const TYPE_RESOURCE = 'resource';
 
     public function load(ObjectManager $manager)
     {
@@ -30,6 +31,11 @@ class TypeFixtures extends Fixture
         $manager->persist($type);
 
         $this->addReference(self::TYPE_CONSUMABLE, $type);
+
+        $type = $this->createType(self::TYPE_RESOURCE);
+        $manager->persist($type);
+
+        $this->addReference(self::TYPE_RESOURCE, $type);
 
         $manager->flush();
     }
