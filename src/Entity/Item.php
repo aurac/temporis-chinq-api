@@ -83,7 +83,7 @@ class Item
     private ?string $link;
 
     /**
-     * @ORM\ManyToOne(targetEntity=SubType::class, inversedBy="items")
+     * @ORM\ManyToOne(targetEntity=SubType::class)
      * @ORM\JoinColumn(nullable=false)
      * @Groups({"item:read", "item:write", "card:read", "recipe:read"})
      */
