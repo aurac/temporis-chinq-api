@@ -17,7 +17,10 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *     },
  *     normalizationContext={"groups"={"type:read"}, "swagger_definition_name"="Read"},
  *     denormalizationContext={"groups"={"type:write"}},
- *     shortName="types"
+ *     shortName="types",
+ *     attributes={
+ *          "pagination_enabled"=false
+ *     }
  * )
  * @ORM\Entity(repositoryClass=TypeRepository::class)
  */

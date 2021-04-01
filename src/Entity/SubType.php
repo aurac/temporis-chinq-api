@@ -14,7 +14,10 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *          "get"={}
  *     },
  *     normalizationContext={"groups"={"subtype:read"}, "swagger_definition_name"="Read"},
- *     shortName="sub_types"
+ *     shortName="sub_types",
+ *     attributes={
+ *          "pagination_enabled"=false
+ *     }
  * )
  * @ORM\Entity(repositoryClass=SubTypeRepository::class)
  */
