@@ -44,7 +44,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  * })
  * @ApiFilter(RangeFilter::class, properties={"level"})
  * @ApiFilter(PropertyFilter::class)
- * @UniqueEntity(fields={"name"})
  */
 class Item
 {

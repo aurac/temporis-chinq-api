@@ -77,15 +77,6 @@ class ImportItemsCommand extends Command
                     continue;
                 }
 
-                $itemObj = $this->itemRepository->findOneBy([
-                    'name' => $item['name']
-                ]);
-
-                if ($itemObj) {
-                    $output->writeln('Item '.$item['name'].' already exists');
-                    continue;
-                }
-
                 $itemObj = new Item();
                 $itemObj->setName($item['name'])
                     ->setLevel($item['level'])

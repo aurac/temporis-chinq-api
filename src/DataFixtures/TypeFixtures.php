@@ -16,9 +16,9 @@ use Doctrine\Persistence\ObjectManager;
 
 class TypeFixtures extends Fixture
 {
-    const TYPE_CONSUMABLE = 'consumable';
-    const TYPE_STUFF = 'stuff';
-    const TYPE_RESOURCE = 'resource';
+    const TYPE_CONSUMABLE = 'Consommable';
+    const TYPE_STUFF = 'Equipement';
+    const TYPE_RESOURCE = 'Ressource';
 
     public function load(ObjectManager $manager)
     {
