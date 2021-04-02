@@ -1,6 +1,4 @@
-# temporis-chinq-api
-
-#0. Requirements
+# Prérequis
 
 PHP 7.4
 
@@ -10,7 +8,7 @@ PostgreSQL 12.6
 
 [Symfony CLI](https://symfony.com/download)
 
-#1. Setup l'environnement
+# Setup l'environnement
 
 Créer un fichier .env.local à la racine du projet. Ajouter la ligne:
 
@@ -18,13 +16,13 @@ Créer un fichier .env.local à la racine du projet. Ajouter la ligne:
     
 Modifier les informations db_user, db_password et db_name avec les informations de connexion à votre base de données.
 
-#2. Installation des dépendences
+# Installation des dépendences
 
 Lancer la commande suivante afin d'installer les dépendences requises au projet:
 
     composer install
 
-#3. Création et initialisation de la base de données
+# Création et initialisation de la base de données
 
 Lancer la commande suivante afin de créer la base de données grâce aux informations présente dans le fichier .env.local:
 
@@ -34,7 +32,7 @@ Lancer la commande suivante afin de générer les tables et les données initial
 
     php bin/console doctrine:migrations:migrate
 
-#4. Démarrer le serveur local
+# Démarrer le serveur local
 
 Lancer la commande suivante afin de démarrer le serveur web local fourni par symfony:
 
