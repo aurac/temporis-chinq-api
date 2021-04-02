@@ -32,6 +32,10 @@ Lancer la commande suivante afin de générer les tables et les données initial
 
     php bin/console doctrine:migrations:migrate
 
+**Optionnel**: Lancer la commande suivante afin de remplir la table des cartes avec des données de test:
+
+        php bin/console doctrine:fixtures:load --group=cards --append
+
 # Démarrer le serveur local
 
 Lancer la commande suivante afin de démarrer le serveur web local fourni par symfony:
