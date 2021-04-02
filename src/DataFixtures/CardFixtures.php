@@ -22,18 +22,17 @@ class CardFixtures extends Fixture implements FixtureGroupInterface
         $nbCards = 100;
 
         for ($i = 1; $i <= $nbCards; $i++) {
-            $card = $this->createCard('carte'.$i, $i, rand(1,200), 'description carte '.$i);
+            $card = $this->createCard('carte'.$i, rand(1,200), 'description carte '.$i);
             $manager->persist($card);
         }
 
         $manager->flush();
     }
 
-    private function createCard(string $name, int $number, int $level, string $description): Card
+    private function createCard(string $name, int $level, string $description): Card
     {
         $card = new Card();
         $card->setName($name)
-            ->setNumber($number)
             ->setLevel($level)
             ->setDescription($description)
         ;

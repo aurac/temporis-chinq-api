@@ -29,7 +29,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass=CardRepository::class)
  * @ApiFilter(PropertyFilter::class)
  * @ApiFilter(SearchFilter::class, properties={"recipes.item.name":"ipartial"})
- * @UniqueEntity(fields={"number"})
  * @UniqueEntity(fields={"name"})
  */
 class Card
@@ -41,14 +40,6 @@ class Card
      * @Groups({"card:read", "item:read", "recipelevel:read", "recipelevel:write"})
      */
     private int $id;
-
-    /**
-     * @ORM\Column(type="integer")
-     * @Groups({"card:read", "card:write", "item:read", "recipe:write", "recipe:read", "recipelevel:read"})
-     * @Assert\NotBlank
-     * @Assert\GreaterThan(0)
-     */
-    private int $number;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -92,18 +83,6 @@ class Card
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getNumber(): ?int
-    {
-        return $this->number;
-    }
-
-    public function setNumber(int $number): self
-    {
-        $this->number = $number;
-
-        return $this;
     }
 
     public function getName(): ?string

@@ -37,7 +37,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     "name": "ipartial",
  *     "level": "exact",
  *     "recipes.cards.name": "ipartial",
- *     "recipes.cards.number": "exact",
  *     "subType.type.id": "exact",
  *     "subType.id": "exact",
  *     "recipes.cards.id": "exact"
