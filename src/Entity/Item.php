@@ -34,9 +34,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  * )
  * @ORM\Entity(repositoryClass=ItemRepository::class)
  * @ApiFilter(SearchFilter::class, properties={
- *     "name": "partial",
+ *     "name": "ipartial",
  *     "level": "exact",
- *     "recipes.cards.name": "partial",
+ *     "recipes.cards.name": "ipartial",
  *     "recipes.cards.number": "exact",
  *     "subType.type.id": "exact",
  *     "subType.id": "exact",
