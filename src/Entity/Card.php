@@ -60,7 +60,7 @@ class Card
      * @ORM\Column(type="text", nullable=true)
      * @Groups({"card:read", "card:write", "item:read", "recipe:write", "recipe:read", "recipelevel:read"})
      */
-    private string $description;
+    private ?string $description;
 
     /**
      * @ORM\ManyToMany(targetEntity=Recipe::class, mappedBy="cards")
