@@ -38,7 +38,7 @@ class Card
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"card:read", "item:read", "recipelevel:read"})
+     * @Groups({"card:read", "item:read", "recipelevel:read", "recipelevel:write"})
      */
     private int $id;
 

@@ -6,6 +6,7 @@ use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Serializer\Filter\PropertyFilter;
 use App\Repository\RecipeLevelRepository;
+use App\Validator as RecipeAssert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -47,6 +48,7 @@ class RecipeLevel
     /**
      * @ORM\ManyToMany(targetEntity=Card::class, inversedBy="recipeLevels")
      * @Groups({"recipelevel:read", "recipelevel:write"})
+     * @RecipeAssert\MaximumCollectionItem(max="5")
      */
     private Collection $cards;
 

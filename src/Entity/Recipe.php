@@ -6,6 +6,7 @@ use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Serializer\Filter\PropertyFilter;
 use App\Repository\RecipeRepository;
+use App\Validator as RecipeAssert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -47,6 +48,7 @@ class Recipe
      * @ORM\ManyToMany(targetEntity=Card::class, inversedBy="recipes", cascade={"persist"})
      * @Groups({"recipe:read", "recipe:write", "item:read"})
      * @Assert\Valid()
+     * @RecipeAssert\MaximumCollectionItem(max="5")
      */
     private Collection $cards;
 
