@@ -38,48 +38,55 @@ class Card
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"card:read", "item:read"})
+     * @Groups({"card:read", "item:read", "recipelevel:read"})
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups({"card:read", "card:write", "item:read", "recipe:write", "recipe:read"})
+     * @Groups({"card:read", "card:write", "item:read", "recipe:write", "recipe:read", "recipelevel:read"})
      * @Assert\NotBlank
      * @Assert\GreaterThan(0)
      */
-    private $number;
+    private int $number;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"card:read", "card:write", "item:read", "recipe:write", "recipe:read"})
+     * @Groups({"card:read", "card:write", "item:read", "recipe:write", "recipe:read", "recipelevel:read"})
      * @Assert\NotBlank
      */
-    private $name;
+    private string $name;
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups({"card:read", "card:write", "item:read", "recipe:write", "recipe:read"})
+     * @Groups({"card:read", "card:write", "item:read", "recipe:write", "recipe:read", "recipelevel:read"})
      * @Assert\GreaterThan(0)
      * @Assert\NotBlank
      */
-    private $level;
+    private int $level;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"card:read", "card:write", "item:read", "recipe:write", "recipe:read"})
+     * @Groups({"card:read", "card:write", "item:read", "recipe:write", "recipe:read", "recipelevel:read"})
      */
-    private $description;
+    private string $description;
 
     /**
      * @ORM\ManyToMany(targetEntity=Recipe::class, mappedBy="cards")
      * @Groups({"card:read"})
      */
-    private $recipes;
+    private Collection $recipes;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=RecipeLevel::class, mappedBy="cards")
+     * @Groups({"card:read"})
+     */
+    private Collection $recipeLevels;
 
     public function __construct()
     {
         $this->recipes = new ArrayCollection();
+        $this->recipeLevels = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -173,6 +180,33 @@ class Card
     {
         if ($this->recipes->removeElement($recipe)) {
             $recipe->removeCard($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|RecipeLevel[]
+     */
+    public function getRecipeLevels(): Collection
+    {
+        return $this->recipeLevels;
+    }
+
+    public function addRecipeLevel(RecipeLevel $recipeLevel): self
+    {
+        if (!$this->recipeLevels->contains($recipeLevel)) {
+            $this->recipeLevels[] = $recipeLevel;
+            $recipeLevel->addCard($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRecipeLevel(RecipeLevel $recipeLevel): self
+    {
+        if ($this->recipeLevels->removeElement($recipeLevel)) {
+            $recipeLevel->removeCard($this);
         }
 
         return $this;
