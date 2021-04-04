@@ -2,7 +2,9 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Repository\SubTypeRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -19,6 +21,9 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *          "pagination_enabled"=false
  *     }
  * )
+ * @ApiFilter(SearchFilter::class, properties={
+ *     "name": "ipartial"
+ * })
  * @ORM\Entity(repositoryClass=SubTypeRepository::class)
  */
 class SubType
