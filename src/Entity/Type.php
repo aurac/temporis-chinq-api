@@ -2,7 +2,9 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Repository\TypeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -22,6 +24,9 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *          "pagination_enabled"=false
  *     }
  * )
+ * @ApiFilter(SearchFilter::class, properties={
+ *     "name": "ipartial"
+ * })
  * @ORM\Entity(repositoryClass=TypeRepository::class)
  */
 class Type
