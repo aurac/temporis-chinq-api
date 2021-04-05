@@ -49,7 +49,7 @@ class Item
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"item:read", "card:read"})
+     * @Groups({"item:read", "card:read", "recipe:read"})
      */
     private int $id;
 
