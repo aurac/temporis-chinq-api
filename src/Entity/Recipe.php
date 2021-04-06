@@ -42,13 +42,14 @@ class Recipe
      * @ORM\JoinColumn(nullable=false)
      * @Groups({"recipe:read", "recipe:write", "card:read"})
      */
-    private Item $item;
+    private ?Item $item;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Card::class, inversedBy="recipes", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity=Card::class, inversedBy="recipes")
      * @Groups({"recipe:read", "recipe:write", "item:read"})
      * @Assert\Valid()
      * @RecipeAssert\MaximumCollectionItem(max="5")
+     * @RecipeAssert\MinimumCollectionItem(min="5")
      */
     private Collection $cards;
 

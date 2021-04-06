@@ -42,14 +42,14 @@ class Card
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"card:read", "card:write", "item:read", "recipe:write", "recipe:read", "recipelevel:read"})
+     * @Groups({"card:read", "card:write", "item:read", "recipe:read", "recipelevel:read"})
      * @Assert\NotBlank
      */
     private string $name;
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups({"card:read", "card:write", "item:read", "recipe:write", "recipe:read", "recipelevel:read"})
+     * @Groups({"card:read", "card:write", "item:read", "recipe:read", "recipelevel:read"})
      * @Assert\GreaterThan(0)
      * @Assert\NotBlank
      */
@@ -57,7 +57,7 @@ class Card
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"card:read", "card:write", "item:read", "recipe:write", "recipe:read", "recipelevel:read"})
+     * @Groups({"card:read", "card:write", "item:read", "recipe:read", "recipelevel:read"})
      */
     private ?string $description;
 
