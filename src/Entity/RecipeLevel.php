@@ -49,7 +49,7 @@ class RecipeLevel
      * @ORM\ManyToMany(targetEntity=Card::class, inversedBy="recipeLevels")
      * @Groups({"recipelevel:read", "recipelevel:write"})
      * @RecipeAssert\MaximumCollectionItem(max="5")
-     * @RecipeAssert\MinimumCollectionItem(max="5")
+     * @RecipeAssert\MinimumCollectionItem(min="5")
      */
     private Collection $cards;
 
