@@ -16,10 +16,17 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource(
- *     collectionOperations={"get", "post"},
+ *     collectionOperations={
+ *         "get",
+ *         "post" = { "security" = "is_granted('CREATE')" }
+ *     },
  *     itemOperations={
  *          "get"={},
- *          "put"
+ *          "put" = {
+ *              "security" = "is_granted('EDIT', object)",
+ *              "security_message" = "Only Admin can edit a card"
+ *          },
+ *          "delete" = { "security" = "is_granted('DELETE', object)" }
  *     },
  *     normalizationContext={"groups"={"card:read"}, "swagger_definition_name"="Read"},
  *     denormalizationContext={"groups"={"card:write"}},
