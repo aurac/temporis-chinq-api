@@ -29,7 +29,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass=CardRepository::class)
  * @ApiFilter(PropertyFilter::class)
  * @ApiFilter(SearchFilter::class, properties={"recipes.item.name":"ipartial"})
- * @UniqueEntity(fields={"name"})
  */
 class Card
 {
@@ -37,7 +36,7 @@ class Card
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"card:read", "item:read", "recipe:read", "recipelevel:read", "recipelevel:write"})
+     * @Groups({"card:read", "item:read", "recipe:read", "recipe:write","recipelevel:read", "recipelevel:write"})
      */
     private int $id;
 
