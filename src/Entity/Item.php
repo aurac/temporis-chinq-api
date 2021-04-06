@@ -94,6 +94,7 @@ class Item
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"item:read", "item:write", "card:read", "recipe:read"})
      */
     private ?string $imgLink;
 
