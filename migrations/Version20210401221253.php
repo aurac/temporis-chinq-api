@@ -24,6 +24,7 @@ class Version20210401221253 extends AbstractMigration
         $this->addSql('INSERT INTO public.type VALUES (1, \'Equipement\')');
         $this->addSql('INSERT INTO public.type VALUES (2, \'Consommable\')');
         $this->addSql('INSERT INTO public.type VALUES (3, \'Ressource\')');
+        $this->addSql('SELECT setval(\'type_id_seq\', (SELECT MAX(id) from type));');
 
         $this->addSql('INSERT INTO public.sub_type VALUES (1, 2, \'Bière\')');
         $this->addSql('INSERT INTO public.sub_type VALUES (2, 2, \'Boisson\')');
@@ -82,7 +83,7 @@ class Version20210401221253 extends AbstractMigration
         $this->addSql('INSERT INTO public.sub_type VALUES (55, 1, \'Sac à dos\')');
         $this->addSql('INSERT INTO public.sub_type VALUES (56, 1, \'Trophée\')');
         $this->addSql('INSERT INTO public.sub_type VALUES (57, 3, \'Idole\')');
-
+        $this->addSql('SELECT setval(\'sub_type_id_seq\', (SELECT MAX(id) from sub_type));');
     }
 
     public function down(Schema $schema) : void

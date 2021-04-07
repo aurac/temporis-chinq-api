@@ -4772,6 +4772,7 @@ final class Version20210402002542 extends AbstractMigration
         $this->addSql("INSERT INTO public.item VALUES (4750, 57, 'Yoche mineure', 15, 'https://www.dofus.com/fr/mmorpg/encyclopedie/idoles/61-yoche-mineure', 'http://staticns.ankama.com/dofus/www/game/items/200/178029.png')");
         $this->addSql("INSERT INTO public.item VALUES (4751, 57, 'Zaihn magistrale', 181, 'https://www.dofus.com/fr/mmorpg/encyclopedie/idoles/50-zaihn-magistrale', 'http://staticns.ankama.com/dofus/www/game/items/200/178068.png')");
         $this->addSql("INSERT INTO public.item VALUES (4752, 57, 'Zaihn mineure', 61, 'https://www.dofus.com/fr/mmorpg/encyclopedie/idoles/47-zaihn-mineure', 'http://staticns.ankama.com/dofus/www/game/items/200/178065.png')");
+        $this->addSql('SELECT setval(\'item_id_seq\', (SELECT MAX(id) from item));');
     }
 
     public function down(Schema $schema): void

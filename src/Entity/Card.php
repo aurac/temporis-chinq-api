@@ -10,7 +10,6 @@ use App\Repository\CardRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\SerializedName;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -51,12 +50,11 @@ class Card
     private string $name;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      * @Groups({"card:read", "card:write", "item:read", "recipe:read", "recipelevel:read"})
      * @Assert\GreaterThan(0)
-     * @Assert\NotBlank
      */
-    private int $level;
+    private ?int $level;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -75,6 +73,45 @@ class Card
      * @Groups({"card:read"})
      */
     private Collection $recipeLevels;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=CardType::class, inversedBy="cards")
+     * @ORM\JoinColumn(nullable=false)
+     * @Groups({"card:read", "card:write", "item:read", "recipe:read", "recipelevel:read"})
+     */
+    private ?CardType $type;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Rarity::class, inversedBy="cards")
+     * @ORM\JoinColumn(nullable=true)
+     * @Groups({"card:read", "card:write", "item:read", "recipe:read", "recipelevel:read"})
+     */
+    private ?Rarity $rarity;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Source::class, inversedBy="cards")
+     * @ORM\JoinColumn(nullable=true)
+     * @Groups({"card:read", "card:write", "item:read", "recipe:read", "recipelevel:read"})
+     */
+    private ?Source $source;
+
+    /**
+     * @var MediaObject|null
+     *
+     * @ORM\ManyToOne(targetEntity=MediaObject::class)
+     * @ORM\JoinColumn(nullable=true)
+     * @Groups({"card:read", "card:write", "item:read", "recipe:read", "recipelevel:read"})
+     */
+    public ?MediaObject $imagePng;
+
+    /**
+     * @var MediaObject|null
+     *
+     * @ORM\ManyToOne(targetEntity=MediaObject::class)
+     * @ORM\JoinColumn(nullable=true)
+     * @Groups({"card:read", "card:write", "item:read", "recipe:read", "recipelevel:read"})
+     */
+    public ?MediaObject $imageSvg;
 
     public function __construct()
     {
@@ -114,17 +151,6 @@ class Card
     public function getDescription(): ?string
     {
         return $this->description;
-    }
-
-    /**
-     * @Groups("card:read")
-     */
-    public function getShortDescription(): ?string
-    {
-        if (strlen($this->description) < 40) {
-            return $this->description;
-        }
-        return substr($this->description, 0, 40);
     }
 
     /**
@@ -189,6 +215,66 @@ class Card
         if ($this->recipeLevels->removeElement($recipeLevel)) {
             $recipeLevel->removeCard($this);
         }
+
+        return $this;
+    }
+
+    public function getType(): ?CardType
+    {
+        return $this->type;
+    }
+
+    public function setType(?CardType $type): self
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    public function getRarity(): ?Rarity
+    {
+        return $this->rarity;
+    }
+
+    public function setRarity(?Rarity $rarity): self
+    {
+        $this->rarity = $rarity;
+
+        return $this;
+    }
+
+    public function getSource(): ?Source
+    {
+        return $this->source;
+    }
+
+    public function setSource(?Source $source): self
+    {
+        $this->source = $source;
+
+        return $this;
+    }
+
+    public function getImagePng(): ?MediaObject
+    {
+        return $this->imagePng;
+    }
+
+    public function setImagePng(?MediaObject $imagePng): self
+    {
+        $this->imagePng = $imagePng;
+
+        return $this;
+    }
+
+    public function getImageSvg(): ?MediaObject
+    {
+        return $this->imageSvg;
+    }
+
+    public function setImageSvg(?MediaObject $imageSvg): self
+    {
+        $this->imageSvg = $imageSvg;
 
         return $this;
     }

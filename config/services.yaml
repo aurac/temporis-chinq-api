@@ -4,7 +4,8 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-
+    upload_destination: '%kernel.project_dir%/public/media'
+    url_card_image: 'https://cdn.jsdelivr.net/gh/jdathueyt/dofus-temporis-v-cards'
 services:
     # default configuration for services in *this* file
     _defaults:
@@ -35,3 +36,28 @@ services:
             $projectDir: '%kernel.project_dir%'
         tags:
             - { name: 'console.command' }
+
+    App\Command\ImportCardsCommand:
+        arguments:
+            $projectDir: '%kernel.project_dir%'
+        tags:
+            - { name: 'console.command' }
+
+    App\Command\DownloadCardImagesCommand:
+        arguments:
+            $projectDir: '%kernel.project_dir%'
+            $uploadDir: '%upload_destination%'
+            $urlCardImage: '%url_card_image%'
+        tags:
+            - { name: 'console.command' }
+
+    App\Service\CardImporter:
+        arguments:
+            $projectDir: '%kernel.project_dir%'
+
+    App\Serializer\MediaObjectContentUrlNormalizer:
+        decorates: 'api_platform.serializer.normalizer.item'
+
+    app.serializer.normalizer.jsonld.media_object:
+        class: App\Serializer\MediaObjectContentUrlNormalizer
+        decorates: 'api_platform.jsonld.normalizer.item'

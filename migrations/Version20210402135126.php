@@ -223,6 +223,7 @@ final class Version20210402135126 extends AbstractMigration
         $this->addSql("INSERT INTO public.recipe_level VALUES (197, 198)");
         $this->addSql("INSERT INTO public.recipe_level VALUES (198, 199)");
         $this->addSql("INSERT INTO public.recipe_level VALUES (199, 200)");
+        $this->addSql('SELECT setval(\'recipe_level_id_seq\', (SELECT MAX(id) from recipe_level));');
     }
 
     public function down(Schema $schema) : void
