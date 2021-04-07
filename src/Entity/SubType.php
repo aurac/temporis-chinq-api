@@ -22,7 +22,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *     }
  * )
  * @ApiFilter(SearchFilter::class, properties={
- *     "name": "ipartial"
+ *     "name": "ipartial",
+ *     "type.id": "exact",
  * })
  * @ORM\Entity(repositoryClass=SubTypeRepository::class)
  */
