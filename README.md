@@ -32,9 +32,11 @@ Lancer la commande suivante afin de générer les tables et les données initial
 
     php bin/console doctrine:migrations:migrate
 
-**Optionnel**: Lancer la commande suivante afin de remplir la table des cartes avec des données de test:
+# Suppression du cache
 
-        php bin/console doctrine:fixtures:load --group=cards --append
+Après avoir mis à jour l'environnement, il faut supprimer le cache avec cette commande:
+
+    php bin/console cache:clear
 
 # Démarrer le serveur local
 
