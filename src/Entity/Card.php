@@ -28,8 +28,11 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass=CardRepository::class)
  * @ApiFilter(PropertyFilter::class)
  * @ApiFilter(SearchFilter::class, properties={
- *     "recipes.item.name":"ipartial",
- *     "name": "ipartial"
+ *     "name": "ipartial",
+ *     "source.id": "exact",
+ *     "rarity.id": "exact",
+ *     "type.id": "exact",
+ *     "recipes.item.name":"ipartial"
  * })
  */
 class Card
