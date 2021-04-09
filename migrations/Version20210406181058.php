@@ -34,6 +34,7 @@ final class Version20210406181058 extends AbstractMigration
 
         $this->addSql("INSERT INTO public.rarity VALUES (1, 'Classique')");
         $this->addSql("INSERT INTO public.rarity VALUES (2, 'Rare')");
+        $this->addSql("INSERT INTO public.rarity VALUES (3, 'Inconnu')");
         $this->addSql('SELECT setval(\'rarity_id_seq\', (SELECT MAX(id) from rarity));');
 
         $this->addSql("INSERT INTO public.source VALUES (1, NULL, 'Alchimiste')");
@@ -184,6 +185,7 @@ final class Version20210406181058 extends AbstractMigration
         $this->addSql("INSERT INTO public.source VALUES (146, 14, 'Champmane')");
         $this->addSql("INSERT INTO public.source VALUES (147, 14, 'Mulou')");
         $this->addSql("INSERT INTO public.source VALUES (148, 14, 'Mineur sombre')");
+        $this->addSql("INSERT INTO public.source VALUES (149, NULL, 'Inconnu')");
         $this->addSql('SELECT setval(\'source_id_seq\', (SELECT MAX(id) from source));');
     }
 
@@ -193,5 +195,8 @@ final class Version20210406181058 extends AbstractMigration
         $this->addSql('TRUNCATE public.card_type CASCADE');
         $this->addSql('TRUNCATE public.rarity CASCADE');
         $this->addSql('TRUNCATE public.source CASCADE');
+        $this->addSql('SELECT setval(\'card_type_id_seq\', 1);');
+        $this->addSql('SELECT setval(\'rarity_id_seq\', 1);');
+        $this->addSql('SELECT setval(\'source_id_seq\', 1);');
     }
 }
