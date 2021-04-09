@@ -74,7 +74,7 @@ class MediaObject
      * @var string|null
      *
      * @ApiProperty(iri="http://schema.org/contentUrl")
-     * @Groups({"media_object_read", "card:read"})
+     * @Groups({"media_object_read", "card:read", "item:read"})
      */
     public ?string $contentUrl = null;
 
@@ -90,7 +90,6 @@ class MediaObject
      * @var string|null
      *
      * @ORM\Column(nullable=true)
-     * @Groups({"card:read", "card:write", "item:read", "recipe:read", "recipelevel:read"})
      */
     public ?string $filePath;
 
