@@ -67,6 +67,10 @@ class CardImporter
                 ->setType($type)
             ;
 
+            if (isset($item['level'])) {
+                $card->setLevel($item['level']);
+            }
+
             if ($rarity) {
                 $card->setRarity($rarity);
             }

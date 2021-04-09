@@ -51,6 +51,18 @@ services:
         tags:
             - { name: 'console.command' }
 
+    App\Command\DownloadItemImagesCommand:
+        arguments:
+            $uploadDir: '%upload_destination%'
+        tags:
+            - { name: 'console.command' }
+
+    App\Command\CreateItemsMediaObjectsCommand:
+        arguments:
+            $uploadDir: '%upload_destination%'
+        tags:
+            - { name: 'console.command' }
+
     App\Service\CardImporter:
         arguments:
             $projectDir: '%kernel.project_dir%'

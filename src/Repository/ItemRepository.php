@@ -19,6 +19,30 @@ class ItemRepository extends ServiceEntityRepository
         parent::__construct($registry, Item::class);
     }
 
+    public function getItemsId()
+    {
+        $result = $this->createQueryBuilder('i')
+            ->select('i.id')
+            ->getQuery()
+            ->getArrayResult()
+        ;
+
+        return array_column($result, "id");
+    }
+
+    public function getItemsIdWithoutImage()
+    {
+        $result = $this->createQueryBuilder('i')
+            ->select('i.id')
+            ->andWhere('i.image is null')
+            ->orderBy('i.id')
+            ->getQuery()
+            ->getArrayResult()
+        ;
+
+        return array_column($result, 'id');
+    }
+
     // /**
     //  * @return Item[] Returns an array of Item objects
     //  */

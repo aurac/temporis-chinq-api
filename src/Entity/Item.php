@@ -98,6 +98,15 @@ class Item
      */
     private ?string $imgLink;
 
+    /**
+     * @var MediaObject|null
+     *
+     * @ORM\ManyToOne(targetEntity=MediaObject::class)
+     * @ORM\JoinColumn(nullable=true)
+     * @Groups({"card:read", "item:read", "recipe:read", "recipelevel:read"})
+     */
+    public ?MediaObject $image;
+
     public function __construct()
     {
         $this->recipes = new ArrayCollection();
@@ -194,6 +203,18 @@ class Item
     public function setImgLink(?string $imgLink): self
     {
         $this->imgLink = $imgLink;
+
+        return $this;
+    }
+
+    public function getImage(): ?MediaObject
+    {
+        return $this->image;
+    }
+
+    public function setImage(?MediaObject $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }
