@@ -195,8 +195,8 @@ final class Version20210406181058 extends AbstractMigration
         $this->addSql('TRUNCATE public.card_type CASCADE');
         $this->addSql('TRUNCATE public.rarity CASCADE');
         $this->addSql('TRUNCATE public.source CASCADE');
-        $this->addSql('SELECT setval(\'card_type_id_seq\', 1);');
-        $this->addSql('SELECT setval(\'rarity_id_seq\', 1);');
-        $this->addSql('SELECT setval(\'source_id_seq\', 1);');
+        $this->addSql('ALTER SEQUENCE card_type_id_seq RESTART WITH 1');
+        $this->addSql('ALTER SEQUENCE rarity_id_seq RESTART WITH 1');
+        $this->addSql('ALTER SEQUENCE source_id_seq RESTART WITH 1');
     }
 }

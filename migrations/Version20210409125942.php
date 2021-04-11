@@ -5177,8 +5177,8 @@ final class Version20210409125942 extends AbstractMigration
         $this->addSql("INSERT INTO public.media_object VALUES (5158, 'images/svg/clan_martegel.svg')");
         $this->addSql("INSERT INTO public.media_object VALUES (5159, 'images/png/gloursons.png')");
         $this->addSql("INSERT INTO public.media_object VALUES (5160, 'images/svg/gloursons.svg')");
-        $this->addSql("INSERT INTO public.media_object VALUES (5161, 'images/png/abrakne_sombre.png')");
-        $this->addSql("INSERT INTO public.media_object VALUES (5162, 'images/svg/abrakne_sombre.svg')");
+        $this->addSql("INSERT INTO public.media_object VALUES (5161, 'images/png/abraknydiens_sombres.png')");
+        $this->addSql("INSERT INTO public.media_object VALUES (5162, 'images/svg/abraknydiens_sombres.svg')");
         $this->addSql("INSERT INTO public.media_object VALUES (5163, 'images/png/arakhai.png')");
         $this->addSql("INSERT INTO public.media_object VALUES (5164, 'images/svg/arakhai.svg')");
         $this->addSql("INSERT INTO public.media_object VALUES (5165, 'images/png/chassouilleurs.png')");
@@ -5219,14 +5219,14 @@ final class Version20210409125942 extends AbstractMigration
         $this->addSql("INSERT INTO public.media_object VALUES (5200, 'images/svg/monstres_des_ruines_sousmarines.svg')");
         $this->addSql("INSERT INTO public.media_object VALUES (5201, 'images/png/serviteurs_de_lindicible.png')");
         $this->addSql("INSERT INTO public.media_object VALUES (5202, 'images/svg/serviteurs_de_lindicible.svg')");
-        $this->addSql("INSERT INTO public.media_object VALUES (5203, 'images/png/rats.png')");
-        $this->addSql("INSERT INTO public.media_object VALUES (5204, 'images/svg/rats.svg')");
+        $this->addSql("INSERT INTO public.media_object VALUES (5203, 'images/png/rats_strubiens.png')");
+        $this->addSql("INSERT INTO public.media_object VALUES (5204, 'images/svg/rats_strubiens.svg')");
         $this->addSql("INSERT INTO public.media_object VALUES (5205, 'images/png/dragodindes.png')");
         $this->addSql("INSERT INTO public.media_object VALUES (5206, 'images/svg/dragodindes.svg')");
         $this->addSql("INSERT INTO public.media_object VALUES (5207, 'images/png/koalaks_primitifs.png')");
         $this->addSql("INSERT INTO public.media_object VALUES (5208, 'images/svg/koalaks_primitifs.svg')");
-        $this->addSql("INSERT INTO public.media_object VALUES (5209, 'images/png/blop_griotte_royal.png')");
-        $this->addSql("INSERT INTO public.media_object VALUES (5210, 'images/svg/blop_griotte_royal.svg')");
+        $this->addSql("INSERT INTO public.media_object VALUES (5209, 'images/png/blop_royal.png')");
+        $this->addSql("INSERT INTO public.media_object VALUES (5210, 'images/svg/blop_royal.svg')");
         $this->addSql("INSERT INTO public.media_object VALUES (5211, 'images/png/maitre_corbac.png')");
         $this->addSql("INSERT INTO public.media_object VALUES (5212, 'images/svg/maitre_corbac.svg')");
         $this->addSql("INSERT INTO public.media_object VALUES (5213, 'images/png/tengu_givrefoux.png')");
@@ -5401,8 +5401,8 @@ final class Version20210409125942 extends AbstractMigration
         $this->addSql("INSERT INTO public.media_object VALUES (5382, 'images/svg/hache_du_korriandre.svg')");
         $this->addSql("INSERT INTO public.media_object VALUES (5383, 'images/png/baguette_de_glace.png')");
         $this->addSql("INSERT INTO public.media_object VALUES (5384, 'images/svg/baguette_de_glace.svg')");
-        $this->addSql("INSERT INTO public.media_object VALUES (5385, 'images/png/inconnu.png')");
-        $this->addSql("INSERT INTO public.media_object VALUES (5386, 'images/svg/inconnu.svg')");
+        $this->addSql("INSERT INTO public.media_object VALUES (5385, 'images/png/baton_du_grand_pa_wabbit.png')");
+        $this->addSql("INSERT INTO public.media_object VALUES (5386, 'images/svg/baton_du_grand_pa_wabbit.svg')");
         $this->addSql("INSERT INTO public.media_object VALUES (5387, 'images/png/arc_ange.png')");
         $this->addSql("INSERT INTO public.media_object VALUES (5388, 'images/svg/arc_ange.svg')");
         $this->addSql("INSERT INTO public.media_object VALUES (5389, 'images/png/baguette_hernuement.png')");
@@ -5435,8 +5435,8 @@ final class Version20210409125942 extends AbstractMigration
         $this->addSql("INSERT INTO public.media_object VALUES (5416, 'images/svg/foret_petrifiee.svg')");
         $this->addSql("INSERT INTO public.media_object VALUES (5417, 'images/png/sinistros.png')");
         $this->addSql("INSERT INTO public.media_object VALUES (5418, 'images/svg/sinistros.svg')");
-        $this->addSql("INSERT INTO public.media_object VALUES (5419, 'images/png/abraknyde.png')");
-        $this->addSql("INSERT INTO public.media_object VALUES (5420, 'images/svg/abraknyde.svg')");
+        $this->addSql("INSERT INTO public.media_object VALUES (5419, 'images/png/abraknydiens.png')");
+        $this->addSql("INSERT INTO public.media_object VALUES (5420, 'images/svg/abraknydiens.svg')");
         $this->addSql("INSERT INTO public.media_object VALUES (5421, 'images/png/gelees.png')");
         $this->addSql("INSERT INTO public.media_object VALUES (5422, 'images/svg/gelees.svg')");
         $this->addSql("INSERT INTO public.media_object VALUES (5423, 'images/png/bworks.png')");
@@ -5495,8 +5495,8 @@ final class Version20210409125942 extends AbstractMigration
         $this->addSql("INSERT INTO public.media_object VALUES (5476, 'images/svg/bethel_arkana.svg')");
         $this->addSql("INSERT INTO public.media_object VALUES (5477, 'images/png/draegnerys.png')");
         $this->addSql("INSERT INTO public.media_object VALUES (5478, 'images/svg/draegnerys.svg')");
-        $this->addSql("INSERT INTO public.media_object VALUES (5479, 'images/png/gelee_royale_fraise.png')");
-        $this->addSql("INSERT INTO public.media_object VALUES (5480, 'images/svg/gelee_royale_fraise.svg')");
+        $this->addSql("INSERT INTO public.media_object VALUES (5479, 'images/png/gelee_royale.png')");
+        $this->addSql("INSERT INTO public.media_object VALUES (5480, 'images/svg/gelee_royale.svg')");
         $this->addSql("INSERT INTO public.media_object VALUES (5481, 'images/png/bworker.png')");
         $this->addSql("INSERT INTO public.media_object VALUES (5482, 'images/svg/bworker.svg')");
         $this->addSql("INSERT INTO public.media_object VALUES (5483, 'images/png/kwakwa.png')");
@@ -5625,13 +5625,14 @@ final class Version20210409125942 extends AbstractMigration
         $this->addSql("INSERT INTO public.media_object VALUES (5606, 'images/svg/gantie_royal.svg')");
         $this->addSql("INSERT INTO public.media_object VALUES (5607, 'images/png/bracelet_du_glutin.png')");
         $this->addSql("INSERT INTO public.media_object VALUES (5608, 'images/svg/bracelet_du_glutin.svg')");
-        $this->addSql("INSERT INTO public.media_object VALUES (5609, 'images/png/inconnu.png')");
-        $this->addSql("INSERT INTO public.media_object VALUES (5610, 'images/svg/inconnu.svg')");
+        $this->addSql("INSERT INTO public.media_object VALUES (5609, 'images/png/dragolyre.png')");
+        $this->addSql("INSERT INTO public.media_object VALUES (5610, 'images/svg/dragolyre.svg')");
         $this->addSql("INSERT INTO public.media_object VALUES (5611, 'images/png/amulette_du_mineur_sombre.png')");
         $this->addSql("INSERT INTO public.media_object VALUES (5612, 'images/svg/amulette_du_mineur_sombre.svg')");
         $this->addSql("INSERT INTO public.media_object VALUES (5613, 'images/png/la_doubitch_oboul.png')");
         $this->addSql("INSERT INTO public.media_object VALUES (5614, 'images/svg/la_doubitch_oboul.svg')");
         $this->addSql("INSERT INTO public.media_object VALUES (5615, 'images/png/anneau_du_mineur_gogorifiant.png')");
+        $this->addSql("INSERT INTO public.media_object VALUES (5733, 'images/png/kanistere.png')");
         $this->addSql("INSERT INTO public.media_object VALUES (5616, 'images/svg/anneau_du_mineur_gogorifiant.svg')");
         $this->addSql("INSERT INTO public.media_object VALUES (5617, 'images/png/collier_des_ecaflipuces.png')");
         $this->addSql("INSERT INTO public.media_object VALUES (5618, 'images/svg/collier_des_ecaflipuces.svg')");
@@ -5695,10 +5696,10 @@ final class Version20210409125942 extends AbstractMigration
         $this->addSql("INSERT INTO public.media_object VALUES (5676, 'images/svg/cadran_de_terre.svg')");
         $this->addSql("INSERT INTO public.media_object VALUES (5677, 'images/png/cadran_de_feu.png')");
         $this->addSql("INSERT INTO public.media_object VALUES (5678, 'images/svg/cadran_de_feu.svg')");
-        $this->addSql("INSERT INTO public.media_object VALUES (5679, 'images/png/inconnu.png')");
-        $this->addSql("INSERT INTO public.media_object VALUES (5680, 'images/svg/inconnu.svg')");
-        $this->addSql("INSERT INTO public.media_object VALUES (5681, 'images/png/inconnu.png')");
-        $this->addSql("INSERT INTO public.media_object VALUES (5682, 'images/svg/inconnu.svg')");
+        $this->addSql("INSERT INTO public.media_object VALUES (5679, 'images/png/tailladeuse_de_manche.png')");
+        $this->addSql("INSERT INTO public.media_object VALUES (5680, 'images/svg/tailladeuse_de_manche.svg')");
+        $this->addSql("INSERT INTO public.media_object VALUES (5681, 'images/png/tranchant_infernal.png')");
+        $this->addSql("INSERT INTO public.media_object VALUES (5682, 'images/svg/tranchant_infernal.svg')");
         $this->addSql("INSERT INTO public.media_object VALUES (5683, 'images/png/dagues_eudin.png')");
         $this->addSql("INSERT INTO public.media_object VALUES (5684, 'images/svg/dagues_eudin.svg')");
         $this->addSql("INSERT INTO public.media_object VALUES (5685, 'images/png/pelle_dorado.png')");
@@ -5749,7 +5750,6 @@ final class Version20210409125942 extends AbstractMigration
         $this->addSql("INSERT INTO public.media_object VALUES (5730, 'images/svg/cape_ouroboulos.svg')");
         $this->addSql("INSERT INTO public.media_object VALUES (5731, 'images/png/blemiche.png')");
         $this->addSql("INSERT INTO public.media_object VALUES (5732, 'images/svg/blemiche.svg')");
-        $this->addSql("INSERT INTO public.media_object VALUES (5733, 'images/png/kanistere.png')");
         $this->addSql("INSERT INTO public.media_object VALUES (5734, 'images/svg/kanistere.svg')");
         $this->addSql("INSERT INTO public.media_object VALUES (5735, 'images/png/couronne_du_mansot_royal.png')");
         $this->addSql("INSERT INTO public.media_object VALUES (5736, 'images/svg/couronne_du_mansot_royal.svg')");
@@ -5799,8 +5799,8 @@ final class Version20210409125942 extends AbstractMigration
         $this->addSql("INSERT INTO public.media_object VALUES (5780, 'images/svg/statuette_manoir_lhambadda.svg')");
         $this->addSql("INSERT INTO public.media_object VALUES (5781, 'images/png/potion_raide_dite.png')");
         $this->addSql("INSERT INTO public.media_object VALUES (5782, 'images/svg/potion_raide_dite.svg')");
-        $this->addSql("INSERT INTO public.media_object VALUES (5783, 'images/png/potion_raide_izdaide.png')");
-        $this->addSql("INSERT INTO public.media_object VALUES (5784, 'images/svg/potion_raide_izdaide.svg')");
+        $this->addSql("INSERT INTO public.media_object VALUES (5783, 'images/png/potion_raide_emption.png')");
+        $this->addSql("INSERT INTO public.media_object VALUES (5784, 'images/svg/potion_raide_emption.svg')");
         $this->addSql("INSERT INTO public.media_object VALUES (5785, 'images/png/potion_rouge.png')");
         $this->addSql("INSERT INTO public.media_object VALUES (5786, 'images/svg/potion_rouge.svg')");
         $this->addSql("INSERT INTO public.media_object VALUES (5787, 'images/png/potion_de_glandage.png')");
@@ -5857,8 +5857,8 @@ final class Version20210409125942 extends AbstractMigration
         $this->addSql("INSERT INTO public.media_object VALUES (5838, 'images/svg/sardine_a_letouffee.svg')");
         $this->addSql("INSERT INTO public.media_object VALUES (5839, 'images/png/brochet_farci.png')");
         $this->addSql("INSERT INTO public.media_object VALUES (5840, 'images/svg/brochet_farci.svg')");
-        $this->addSql("INSERT INTO public.media_object VALUES (5841, 'images/png/anguille_souroche_roti.png')");
-        $this->addSql("INSERT INTO public.media_object VALUES (5842, 'images/svg/anguille_souroche_roti.svg')");
+        $this->addSql("INSERT INTO public.media_object VALUES (5841, 'images/png/anguille_roti.png')");
+        $this->addSql("INSERT INTO public.media_object VALUES (5842, 'images/svg/anguille_roti.svg')");
         $this->addSql("INSERT INTO public.media_object VALUES (5843, 'images/png/aile_de_raie.png')");
         $this->addSql("INSERT INTO public.media_object VALUES (5844, 'images/svg/aile_de_raie.svg')");
         $this->addSql("INSERT INTO public.media_object VALUES (5845, 'images/png/aileron_de_requin.png')");
@@ -5901,8 +5901,8 @@ final class Version20210409125942 extends AbstractMigration
         $this->addSql("INSERT INTO public.media_object VALUES (5882, 'images/svg/aroumb.svg')");
         $this->addSql("INSERT INTO public.media_object VALUES (5883, 'images/png/ultram.png')");
         $this->addSql("INSERT INTO public.media_object VALUES (5884, 'images/svg/ultram.svg')");
-        $this->addSql("INSERT INTO public.media_object VALUES (5885, 'images/png/bouclier_du_capitaine_amakna.png')");
-        $this->addSql("INSERT INTO public.media_object VALUES (5886, 'images/svg/bouclier_du_capitaine_amakna.svg')");
+        $this->addSql("INSERT INTO public.media_object VALUES (5885, 'images/png/bouclier_du_captain_amakna.png')");
+        $this->addSql("INSERT INTO public.media_object VALUES (5886, 'images/svg/bouclier_du_captain_amakna.svg')");
         $this->addSql("INSERT INTO public.media_object VALUES (5887, 'images/png/pelle_en_mousse.png')");
         $this->addSql("INSERT INTO public.media_object VALUES (5888, 'images/svg/pelle_en_mousse.svg')");
         $this->addSql("INSERT INTO public.media_object VALUES (5889, 'images/png/lame_du_craqueleur.png')");
@@ -6053,26 +6053,28 @@ final class Version20210409125942 extends AbstractMigration
         $this->addSql("INSERT INTO public.media_object VALUES (6034, 'images/svg/coffre_des_forgerons.svg')");
         $this->addSql("INSERT INTO public.media_object VALUES (6035, 'images/png/damadrya.png')");
         $this->addSql("INSERT INTO public.media_object VALUES (6036, 'images/svg/damadrya.svg')");
-        $this->addSql("INSERT INTO public.media_object VALUES (6037, 'images/png/fragment.png')");
-        $this->addSql("INSERT INTO public.media_object VALUES (6038, 'images/svg/fragment.svg')");
-        $this->addSql("INSERT INTO public.media_object VALUES (6039, 'images/png/fragment.png')");
-        $this->addSql("INSERT INTO public.media_object VALUES (6040, 'images/svg/fragment.svg')");
-        $this->addSql("INSERT INTO public.media_object VALUES (6041, 'images/png/fragment.png')");
-        $this->addSql("INSERT INTO public.media_object VALUES (6042, 'images/svg/fragment.svg')");
-        $this->addSql("INSERT INTO public.media_object VALUES (6043, 'images/png/fragment.png')");
-        $this->addSql("INSERT INTO public.media_object VALUES (6044, 'images/svg/fragment.svg')");
-        $this->addSql("INSERT INTO public.media_object VALUES (6045, 'images/png/fragment.png')");
-        $this->addSql("INSERT INTO public.media_object VALUES (6046, 'images/svg/fragment.svg')");
-        $this->addSql("INSERT INTO public.media_object VALUES (6047, 'images/png/fragment.png')");
-        $this->addSql("INSERT INTO public.media_object VALUES (6048, 'images/svg/fragment.svg')");
-        $this->addSql("INSERT INTO public.media_object VALUES (6049, 'images/png/fragment.png')");
-        $this->addSql("INSERT INTO public.media_object VALUES (6050, 'images/svg/fragment.svg')");
-        $this->addSql("INSERT INTO public.media_object VALUES (6051, 'images/png/fragment.png')");
-        $this->addSql("INSERT INTO public.media_object VALUES (6052, 'images/svg/fragment.svg')");
-        $this->addSql("INSERT INTO public.media_object VALUES (6053, 'images/png/fragment.png')");
-        $this->addSql("INSERT INTO public.media_object VALUES (6054, 'images/svg/fragment.svg')");
-        $this->addSql("INSERT INTO public.media_object VALUES (6055, 'images/png/fragment.png')");
-        $this->addSql("INSERT INTO public.media_object VALUES (6056, 'images/svg/fragment.svg')");
+        $this->addSql("INSERT INTO public.media_object VALUES (6037, 'images/png/fragment_clef_de_la_tempete_de_leliocalypse.png')");
+        $this->addSql("INSERT INTO public.media_object VALUES (6038, 'images/svg/fragment_clef_de_la_tempete_de_leliocalypse.svg')");
+        $this->addSql("INSERT INTO public.media_object VALUES (6039, 'images/png/fragment_bouclier_du_captain_amakna.png')");
+        $this->addSql("INSERT INTO public.media_object VALUES (6040, 'images/svg/fragment_bouclier_du_captain_amakna.svg')");
+        $this->addSql("INSERT INTO public.media_object VALUES (6041, 'images/png/fragment_amulette_de_nileza.png')");
+        $this->addSql("INSERT INTO public.media_object VALUES (6042, 'images/svg/fragment_amulette_de_nileza.svg')");
+        $this->addSql("INSERT INTO public.media_object VALUES (6043, 'images/png/fragment_ceinture_de_klime.png')");
+        $this->addSql("INSERT INTO public.media_object VALUES (6044, 'images/svg/fragment_ceinture_de_klime.svg')");
+        $this->addSql("INSERT INTO public.media_object VALUES (6045, 'images/png/fragment_potion_etoilee.png')");
+        $this->addSql("INSERT INTO public.media_object VALUES (6046, 'images/svg/fragment_potion_etoilee.svg')");
+        $this->addSql("INSERT INTO public.media_object VALUES (6047, 'images/png/fragment_planche_de_salut.png')");
+        $this->addSql("INSERT INTO public.media_object VALUES (6048, 'images/svg/fragment_planche_de_salut.svg')");
+        $this->addSql("INSERT INTO public.media_object VALUES (6049, 'images/png/fragment_dagues_ricol.png')");
+        $this->addSql("INSERT INTO public.media_object VALUES (6050, 'images/svg/fragment_dagues_ricol.svg')");
+        $this->addSql("INSERT INTO public.media_object VALUES (6051, 'images/png/fragment_orbe_regenerant_magistral.png')");
+        $this->addSql("INSERT INTO public.media_object VALUES (6052, 'images/svg/fragment_orbe_regenerant_magistral.svg')");
+        $this->addSql("INSERT INTO public.media_object VALUES (6053, 'images/png/fragment_pain_ture.png')");
+        $this->addSql("INSERT INTO public.media_object VALUES (6054, 'images/svg/fragment_pain_ture.svg')");
+        $this->addSql("INSERT INTO public.media_object VALUES (6055, 'images/png/fragment_jus_de_poissons_mephitique.png')");
+        $this->addSql("INSERT INTO public.media_object VALUES (6056, 'images/svg/fragment_jus_de_poissons_mephitique.svg')");
+        $this->addSql("INSERT INTO public.media_object VALUES (6057, 'images/png/fragment_arc_necrotique.png')");
+        $this->addSql("INSERT INTO public.media_object VALUES (6058, 'images/svg/fragment_arc_necrotique.svg')");
 
         $this->addSql('SELECT setval(\'media_object_id_seq\', (SELECT MAX(id) from media_object));');
     }
@@ -6080,6 +6082,6 @@ final class Version20210409125942 extends AbstractMigration
     public function down(Schema $schema): void
     {
         $this->addSql('TRUNCATE TABLE media_object CASCADE');
-        $this->addSql('SELECT setval(\'media_object_id_seq\', 1);');
+        $this->addSql('ALTER SEQUENCE item_id_seq RESTART WITH 1');
     }
 }

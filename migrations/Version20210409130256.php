@@ -4776,6 +4776,6 @@ final class Version20210409130256 extends AbstractMigration
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('TRUNCATE TABLE item CASCADE');
-        $this->addSql('SELECT setval(\'item_id_seq\', 1);');
+        $this->addSql('ALTER SEQUENCE item_id_seq RESTART WITH 1');
     }
 }

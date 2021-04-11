@@ -91,7 +91,7 @@ class Version20210401221253 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('TRUNCATE public.sub_type CASCADE');
         $this->addSql('TRUNCATE public.type CASCADE');
-        $this->addSql('SELECT setval(\'sub_type_id_seq\', 1);');
-        $this->addSql('SELECT setval(\'type_id_seq\', 1);');
+        $this->addSql('ALTER SEQUENCE sub_type_id_seq RESTART WITH 1');
+        $this->addSql('ALTER SEQUENCE type_id_seq RESTART WITH 1');
     }
 }

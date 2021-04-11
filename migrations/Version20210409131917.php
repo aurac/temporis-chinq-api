@@ -221,7 +221,7 @@ final class Version20210409131917 extends AbstractMigration
         $this->addSql("INSERT INTO public.card VALUES (202, 'Brikoléreux', 190, NULL, 2, 2, 14, 5155, 5156)");
         $this->addSql("INSERT INTO public.card VALUES (203, 'Clan Martegel', 190, NULL, 2, 1, 14, 5157, 5158)");
         $this->addSql("INSERT INTO public.card VALUES (204, 'Gloursons', 190, NULL, 2, 1, 14, 5159, 5160)");
-        $this->addSql("INSERT INTO public.card VALUES (205, 'Abrakne Sombre', 1, NULL, 2, 1, 14, 5161, 5162)");
+        $this->addSql("INSERT INTO public.card VALUES (205, 'Abraknydiens Sombres', 90, NULL, 2, 1, 14, 5161, 5162)");
         $this->addSql("INSERT INTO public.card VALUES (206, 'Arak-haï', 90, NULL, 2, 1, 14, 5163, 5164)");
         $this->addSql("INSERT INTO public.card VALUES (207, 'Chassouilleurs', 190, NULL, 2, 1, 14, 5165, 5166)");
         $this->addSql("INSERT INTO public.card VALUES (208, 'Dragoeufs immatures', 70, NULL, 2, 1, 14, 5167, 5168)");
@@ -242,10 +242,10 @@ final class Version20210409131917 extends AbstractMigration
         $this->addSql("INSERT INTO public.card VALUES (223, 'Monstres des plages', 50, NULL, 2, 1, 14, 5197, 5198)");
         $this->addSql("INSERT INTO public.card VALUES (224, 'Monstres des ruines sous-marines', 190, NULL, 2, 1, 14, 5199, 5200)");
         $this->addSql("INSERT INTO public.card VALUES (225, 'Serviteurs de l''indicible', 190, NULL, 2, 1, 14, 5201, 5202)");
-        $this->addSql("INSERT INTO public.card VALUES (226, 'Rats', 80, NULL, 2, 1, 14, 5203, 5204)");
+        $this->addSql("INSERT INTO public.card VALUES (226, 'Rats Strubiens', 30, NULL, 2, 1, 14, 5203, 5204)");
         $this->addSql("INSERT INTO public.card VALUES (227, 'Dragodindes', 70, NULL, 2, 2, 14, 5205, 5206)");
         $this->addSql("INSERT INTO public.card VALUES (228, 'Koalaks primitifs', 120, NULL, 2, 1, 14, 5207, 5208)");
-        $this->addSql("INSERT INTO public.card VALUES (229, 'Blop Griotte Royal', 60, NULL, 2, 1, 15, 5209, 5210)");
+        $this->addSql("INSERT INTO public.card VALUES (229, 'Blop Royal', 60, NULL, 2, 1, 15, 5209, 5210)");
         $this->addSql("INSERT INTO public.card VALUES (230, 'Maître Corbac', 110, NULL, 2, 2, 15, 5211, 5212)");
         $this->addSql("INSERT INTO public.card VALUES (231, 'Tengu Givrefoux', 170, NULL, 2, 1, 15, 5213, 5214)");
         $this->addSql("INSERT INTO public.card VALUES (232, 'Protozorreur', 190, NULL, 2, 1, 15, 5215, 5216)");
@@ -333,7 +333,7 @@ final class Version20210409131917 extends AbstractMigration
         $this->addSql("INSERT INTO public.card VALUES (314, 'Hache à Lamelles', 157, NULL, 3, 1, 11, 5379, 5380)");
         $this->addSql("INSERT INTO public.card VALUES (315, 'Hache du Korriandre', 188, NULL, 3, 2, 11, 5381, 5382)");
         $this->addSql("INSERT INTO public.card VALUES (316, 'Baguette de Glace', 11, NULL, 3, 1, 12, 5383, 5384)");
-        $this->addSql("INSERT INTO public.card VALUES (317, 'Inconnu', 1, NULL, 3, 1, 12, 5385, 5386)");
+        $this->addSql("INSERT INTO public.card VALUES (317, 'Bâton du Grand Pa Wabbit', 32, NULL, 3, 1, 12, 5385, 5386)");
         $this->addSql("INSERT INTO public.card VALUES (318, 'Arc Ange', 82, NULL, 3, 1, 12, 5387, 5388)");
         $this->addSql("INSERT INTO public.card VALUES (319, 'Baguette Hernuement', 163, NULL, 3, 2, 12, 5389, 5390)");
         $this->addSql("INSERT INTO public.card VALUES (320, 'Bâton des Prophètes', 169, NULL, 3, 1, 12, 5391, 5392)");
@@ -350,7 +350,7 @@ final class Version20210409131917 extends AbstractMigration
         $this->addSql("INSERT INTO public.card VALUES (331, 'Cuirassés', 190, NULL, 3, 1, 14, 5413, 5414)");
         $this->addSql("INSERT INTO public.card VALUES (332, 'Forêt pétrifiée', 180, NULL, 3, 1, 14, 5415, 5416)");
         $this->addSql("INSERT INTO public.card VALUES (333, 'Sinistros', 190, NULL, 3, 2, 14, 5417, 5418)");
-        $this->addSql("INSERT INTO public.card VALUES (334, 'Abraknyde', 1, NULL, 3, 1, 14, 5419, 5420)");
+        $this->addSql("INSERT INTO public.card VALUES (334, 'Abraknydiens', 50, NULL, 3, 1, 14, 5419, 5420)");
         $this->addSql("INSERT INTO public.card VALUES (335, 'Gelées', 50, NULL, 3, 1, 14, 5421, 5422)");
         $this->addSql("INSERT INTO public.card VALUES (336, 'Bworks', 50, NULL, 3, 1, 14, 5423, 5424)");
         $this->addSql("INSERT INTO public.card VALUES (337, 'Miséreux', 190, NULL, 3, 1, 14, 5425, 5426)");
@@ -380,7 +380,7 @@ final class Version20210409131917 extends AbstractMigration
         $this->addSql("INSERT INTO public.card VALUES (361, 'Mansot Royal', 140, NULL, 3, 2, 15, 5473, 5474)");
         $this->addSql("INSERT INTO public.card VALUES (362, 'Bethel Arkana', 190, NULL, 3, 1, 15, 5475, 5476)");
         $this->addSql("INSERT INTO public.card VALUES (363, 'Draegnerys', 70, NULL, 3, 1, 15, 5477, 5478)");
-        $this->addSql("INSERT INTO public.card VALUES (364, 'Gelée Royale Fraise', 60, NULL, 3, 2, 15, 5479, 5480)");
+        $this->addSql("INSERT INTO public.card VALUES (364, 'Gelée Royale', 60, NULL, 3, 2, 15, 5479, 5480)");
         $this->addSql("INSERT INTO public.card VALUES (365, 'Bworker', 180, NULL, 3, 1, 15, 5481, 5482)");
         $this->addSql("INSERT INTO public.card VALUES (366, 'Kwakwa', 50, NULL, 3, 1, 15, 5483, 5484)");
         $this->addSql("INSERT INTO public.card VALUES (367, 'Chafer Rōnin', 40, NULL, 3, 1, 15, 5485, 5486)");
@@ -445,7 +445,7 @@ final class Version20210409131917 extends AbstractMigration
         $this->addSql("INSERT INTO public.card VALUES (426, 'Anneau Rexik', 1, NULL, 5, 1, 7, 5603, 5604)");
         $this->addSql("INSERT INTO public.card VALUES (427, 'Gantie Royal', 6, NULL, 5, 1, 7, 5605, 5606)");
         $this->addSql("INSERT INTO public.card VALUES (428, 'Bracelet du Glutin', 25, NULL, 5, 1, 7, 5607, 5608)");
-        $this->addSql("INSERT INTO public.card VALUES (429, 'Inconnu', 1, NULL, 5, 1, 7, 5609, 5610)");
+        $this->addSql("INSERT INTO public.card VALUES (429, 'Dragolyre', 32, NULL, 5, 1, 7, 5609, 5610)");
         $this->addSql("INSERT INTO public.card VALUES (430, 'Amulette du Mineur Sombre', 39, NULL, 5, 1, 7, 5611, 5612)");
         $this->addSql("INSERT INTO public.card VALUES (431, 'La Doubitch O''Boul', 77, NULL, 5, 1, 7, 5613, 5614)");
         $this->addSql("INSERT INTO public.card VALUES (432, 'Anneau du Mineur Gogorifiant', 84, NULL, 5, 1, 7, 5615, 5616)");
@@ -480,8 +480,8 @@ final class Version20210409131917 extends AbstractMigration
         $this->addSql("INSERT INTO public.card VALUES (461, 'Critus', 140, NULL, 5, 1, 10, 5673, 5674)");
         $this->addSql("INSERT INTO public.card VALUES (462, 'Cadran de Terre', 165, NULL, 5, 1, 10, 5675, 5676)");
         $this->addSql("INSERT INTO public.card VALUES (463, 'Cadran de Feu', 175, NULL, 5, 2, 10, 5677, 5678)");
-        $this->addSql("INSERT INTO public.card VALUES (464, 'Inconnu', 1, NULL, 5, 1, 11, 5679, 5680)");
-        $this->addSql("INSERT INTO public.card VALUES (465, 'Inconnu', 1, NULL, 5, 1, 11, 5681, 5682)");
+        $this->addSql("INSERT INTO public.card VALUES (464, 'Tailladeuse de manche', 2, NULL, 5, 1, 11, 5679, 5680)");
+        $this->addSql("INSERT INTO public.card VALUES (465, 'Tranchant infernal', 22, NULL, 5, 1, 11, 5681, 5682)");
         $this->addSql("INSERT INTO public.card VALUES (466, 'Dagues Eudin', 171, NULL, 5, 2, 11, 5683, 5684)");
         $this->addSql("INSERT INTO public.card VALUES (467, 'Pelle Dorado', 178, NULL, 5, 2, 11, 5685, 5686)");
         $this->addSql("INSERT INTO public.card VALUES (468, 'Baguette de Boisaille', 3, NULL, 5, 1, 12, 5687, 5688)");
@@ -532,7 +532,7 @@ final class Version20210409131917 extends AbstractMigration
         $this->addSql("INSERT INTO public.card VALUES (513, 'Lucky cat', 1, NULL, 5, 1, 149, 5777, 5778)");
         $this->addSql("INSERT INTO public.card VALUES (514, 'Statuette manoir lhambadda', 1, NULL, 5, 1, 149, 5779, 5780)");
         $this->addSql("INSERT INTO public.card VALUES (515, 'Potion Raide Dite', 30, NULL, 4, 1, 1, 5781, 5782)");
-        $this->addSql("INSERT INTO public.card VALUES (516, 'Potion Raide Izdaide', 150, NULL, 4, 1, 1, 5783, 5784)");
+        $this->addSql("INSERT INTO public.card VALUES (516, 'Potion Raide Emption', 130, NULL, 5, 1, 1, 5783, 5784)");
         $this->addSql("INSERT INTO public.card VALUES (517, 'Potion rouge', 1, NULL, 4, 1, 1, 5785, 5786)");
         $this->addSql("INSERT INTO public.card VALUES (518, 'Potion de glandage', 175, NULL, 4, 1, 1, 5787, 5788)");
         $this->addSql("INSERT INTO public.card VALUES (519, 'Potion revitalisante', 180, NULL, 4, 1, 1, 5789, 5790)");
@@ -561,7 +561,7 @@ final class Version20210409131917 extends AbstractMigration
         $this->addSql("INSERT INTO public.card VALUES (542, 'Bâton de crabe', 30, NULL, 4, 1, 6, 5835, 5836)");
         $this->addSql("INSERT INTO public.card VALUES (543, 'Sardine à l''étouffée', 70, NULL, 4, 1, 6, 5837, 5838)");
         $this->addSql("INSERT INTO public.card VALUES (544, 'Brochet farci', 80, NULL, 4, 1, 6, 5839, 5840)");
-        $this->addSql("INSERT INTO public.card VALUES (545, 'Anguille souroche rôti', 100, NULL, 4, 1, 6, 5841, 5842)");
+        $this->addSql("INSERT INTO public.card VALUES (545, 'Anguille rôti', 100, NULL, 4, 1, 6, 5841, 5842)");
         $this->addSql("INSERT INTO public.card VALUES (546, 'Aile de raie', 130, NULL, 4, 1, 6, 5843, 5844)");
         $this->addSql("INSERT INTO public.card VALUES (547, 'Aileron de requin', 150, NULL, 4, 1, 6, 5845, 5846)");
         $this->addSql("INSERT INTO public.card VALUES (548, 'Bar grillé', 160, NULL, 4, 2, 6, 5847, 5848)");
@@ -583,7 +583,7 @@ final class Version20210409131917 extends AbstractMigration
         $this->addSql("INSERT INTO public.card VALUES (564, 'Pikmi', 77, NULL, 4, 1, 10, 5879, 5880)");
         $this->addSql("INSERT INTO public.card VALUES (565, 'Aroumb', 80, NULL, 4, 1, 10, 5881, 5882)");
         $this->addSql("INSERT INTO public.card VALUES (566, 'Ultram', 130, NULL, 4, 1, 10, 5883, 5884)");
-        $this->addSql("INSERT INTO public.card VALUES (567, 'Bouclier du capitaine Amakna', 200, NULL, 4, 2, 10, 5885, 5886)");
+        $this->addSql("INSERT INTO public.card VALUES (567, 'Bouclier du Captain Amakna', 200, NULL, 4, 2, 10, 5885, 5886)");
         $this->addSql("INSERT INTO public.card VALUES (568, 'Pelle en mousse', 20, NULL, 4, 1, 11, 5887, 5888)");
         $this->addSql("INSERT INTO public.card VALUES (569, 'Lame du craqueleur', 37, NULL, 4, 1, 11, 5889, 5890)");
         $this->addSql("INSERT INTO public.card VALUES (570, 'Hache Darsson', 57, NULL, 4, 1, 11, 5891, 5892)");
@@ -659,16 +659,17 @@ final class Version20210409131917 extends AbstractMigration
         $this->addSql("INSERT INTO public.card VALUES (640, 'Koulosse', 100, NULL, 4, 1, 15, 6031, 6032)");
         $this->addSql("INSERT INTO public.card VALUES (641, 'Coffre des forgerons', 50, NULL, 4, 1, 15, 6033, 6034)");
         $this->addSql("INSERT INTO public.card VALUES (642, 'Damadrya', 110, NULL, 4, 1, 15, 6035, 6036)");
-        $this->addSql("INSERT INTO public.card VALUES (643, 'Fragment', 1, NULL, 6, 3, 149, 6037, 6038)");
-        $this->addSql("INSERT INTO public.card VALUES (644, 'Fragment', 1, NULL, 6, 3, 149, 6039, 6040)");
-        $this->addSql("INSERT INTO public.card VALUES (645, 'Fragment', 1, NULL, 6, 3, 149, 6041, 6042)");
-        $this->addSql("INSERT INTO public.card VALUES (646, 'Fragment', 1, NULL, 6, 3, 149, 6043, 6044)");
-        $this->addSql("INSERT INTO public.card VALUES (647, 'Fragment', 1, NULL, 6, 3, 149, 6045, 6046)");
-        $this->addSql("INSERT INTO public.card VALUES (648, 'Fragment', 1, NULL, 6, 3, 149, 6047, 6048)");
-        $this->addSql("INSERT INTO public.card VALUES (649, 'Fragment', 1, NULL, 6, 3, 149, 6049, 6050)");
-        $this->addSql("INSERT INTO public.card VALUES (650, 'Fragment', 1, NULL, 6, 3, 149, 6051, 6052)");
-        $this->addSql("INSERT INTO public.card VALUES (651, 'Fragment', 1, NULL, 6, 3, 149, 6053, 6054)");
-        $this->addSql("INSERT INTO public.card VALUES (652, 'Fragment', 1, NULL, 6, 3, 149, 6055, 6056)");
+        $this->addSql("INSERT INTO public.card VALUES (643, 'Fragment - Clef de la Tempete de l''Eliocalypse', 200, NULL, 6, 2, 8, 6037, 6038)");
+        $this->addSql("INSERT INTO public.card VALUES (644, 'Fragment - Bouclier du Captain Amakna', 200, NULL, 6, 2, 10, 6039, 6040)");
+        $this->addSql("INSERT INTO public.card VALUES (645, 'Fragment - Amulette de Nileza', 196, NULL, 6, 1, 7, 6041, 6042)");
+        $this->addSql("INSERT INTO public.card VALUES (646, 'Fragment - Ceinture de Klime', 198, NULL, 6, 1, 9, 6043, 6044)");
+        $this->addSql("INSERT INTO public.card VALUES (647, 'Fragment - Potion étoilée', 200, NULL, 6, 1, 1, 6045, 6046)");
+        $this->addSql("INSERT INTO public.card VALUES (648, 'Fragment - Planche de Salut', 200, NULL, 6, 1, 2, 6047, 6048)");
+        $this->addSql("INSERT INTO public.card VALUES (649, 'Fragment - Dagues Ricol', 198, NULL, 6, 1, 11, 6049, 6050)");
+        $this->addSql("INSERT INTO public.card VALUES (650, 'Fragment - Orbe régénérant magistral', 200, NULL, 6, 1, 4, 6051, 6052)");
+        $this->addSql("INSERT INTO public.card VALUES (651, 'Fragment - Pain Ture', 200, NULL, 6, 1, 5, 6053, 6054)");
+        $this->addSql("INSERT INTO public.card VALUES (652, 'Fragment - Jus de poissons méphitique', 200, NULL, 6, 1, 6, 6055, 6056)");
+        $this->addSql("INSERT INTO public.card VALUES (653, 'Fragment - Arc Nécrotique', 200, NULL, 6, 1, 12, 6057, 6058)");
 
         $this->addSql('SELECT setval(\'card_id_seq\', (SELECT MAX(id) from card));');
     }
@@ -677,6 +678,6 @@ final class Version20210409131917 extends AbstractMigration
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('TRUNCATE TABLE card CASCADE');
-        $this->addSql('SELECT setval(\'card_id_seq\', 1);');
+        $this->addSql('ALTER SEQUENCE card_id_seq RESTART WITH 1');
     }
 }

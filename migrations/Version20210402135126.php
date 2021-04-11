@@ -230,6 +230,6 @@ final class Version20210402135126 extends AbstractMigration
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('TRUNCATE public.recipe_level');
-        $this->addSql('SELECT setval(\'recipe_level_id_seq\', 1);');
+        $this->addSql('ALTER SEQUENCE recipe_level_id_seq RESTART WITH 1');
     }
 }
