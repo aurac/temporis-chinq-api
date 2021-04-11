@@ -185,10 +185,16 @@ class CardImporter
         $name = strtr( $name, $accents );
 
         return strtolower(
-            preg_replace(
-                '/[^A-Za-z0-9_]/',
-                '',
-                str_replace(' ', '_', $name)
+            str_replace(' ', '_',
+                preg_replace(
+                    '/\s+/',
+                    ' ',
+                    preg_replace(
+                        '/[^A-Za-z0-9_ ]/',
+                        '',
+                        $name
+                    )
+                )
             )
         );
     }

@@ -63,6 +63,11 @@ class DownloadCardImagesCommand extends Command
                 $fileName = $this->cardService->cardNameToFileName($item['name']).'.'.$extension;
                 $img = $this->uploadDir.'/images/'.$extension.'/'.$fileName;
 
+                if (file_exists($img)) {
+                    $output->writeln('File '.$fileName.' already exists, skip.');
+                    continue;
+                }
+
                 @mkdir($this->uploadDir.'/images/'.$extension, 0777, true);
                 if (!file_put_contents($img, file_get_contents($url))) {
                     $output->writeln('Failed to download '.$fileName);
