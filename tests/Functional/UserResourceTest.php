@@ -12,75 +12,202 @@ namespace App\Tests\Functional;
 
 
 use App\Entity\User;
+use App\Factory\UserFactory;
 use App\Test\CustomApiTestCase;
 use Hautelook\AliceBundle\PhpUnit\ReloadDatabaseTrait;
 
+/**
+ * Class UserResourceTest
+ * @package App\Tests\Functional
+ * @group users
+ */
 class UserResourceTest extends CustomApiTestCase
 {
-    use ReloadDatabaseTrait;
+    public function testGetCollectionUser()
+    {
+        $client = self::createClient();
+
+        // test not logged in, unauthorized
+        $this->testNotLoggedInUnauthorized($client, 'GET', '/api/users');
+
+        // test logged in, success
+        $this->createUserAndLogin($client, 'password');
+        $client->request('GET', '/api/users');
+        $this->assertResponseStatusCodeSame(200);
+    }
+
+    public function testGetItemUser()
+    {
+        $user = UserFactory::createOne();
+        $userAdmin = UserFactory::new()
+            ->admin()
+            ->create()
+        ;
+
+        self::ensureKernelShutdown();
+        $client = self::createClient();
+
+        // test not logged in, unauthorized
+        $this->testNotLoggedInUnauthorized($client, 'GET', '/api/users');
+
+        // test user get other user
+        $this->createUserAndLogin($client, 'password');
+        $client->request('GET', '/api/users/'.$userAdmin->getId());
+        $this->assertResponseStatusCodeSame(200);
+        $data = $client->getResponse()->toArray();
+        $this->assertArrayNotHasKey('isAdmin', $data);
+
+        // test admin get other user
+        $this->createUserAdminAndLogin($client, 'password');
+        $client->request('GET', '/api/users/'.$user->getId());
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains(['isAdmin' => false]);
+
+        // test admin get other admin
+        $client->request('GET', '/api/users/'.$userAdmin->getId());
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains(['isAdmin' => true]);
+    }
 
     public function testCreateUser()
     {
         $client = self::createClient();
 
+        // test not logged in, unauthorized
+        $this->testNotLoggedInUnauthorized($client, 'POST', '/api/users');
+
+        // test forbidden
+        $this->createUserAndLogin($client, 'password');
+        $client->request('POST', '/api/users', [
+            'json' => []
+        ]);
+        $this->assertResponseStatusCodeSame(403);
+
+        // test success
+        $adminCreator = $this->createUserAdminAndLogin($client, 'password');
         $client->request('POST', '/api/users', [
             'json' => [
-                'email' => 'test@test.fr',
                 'username' => 'test',
                 'password' => 'password'
             ]
         ]);
 
         $this->assertResponseStatusCodeSame(201);
+        UserFactory::assert()->exists([
+            'username' => 'test'
+        ]);
+        $user = UserFactory::find([
+            'username' => 'test'
+        ])->object();
 
-        $this->logIn($client, 'test@test.fr', 'password');
+        $this->login($client, $user, 'password');
+
+        // test create admin user success
+        $this->loginAdmin($client, $adminCreator, 'password');
+        $client->request('POST', '/api/users', [
+            'json' => [
+                'username' => 'administrateur',
+                'password' => 'password',
+                'roles' => [
+                    'ROLE_ADMIN'
+                ]
+            ]
+        ]);
+        $this->assertResponseStatusCodeSame(201);
+
+        UserFactory::assert()->exists([
+            'username' => 'administrateur'
+        ]);
+        $admin = UserFactory::find([
+            'username' => 'administrateur'
+        ])->object();
+
+        $this->loginAdmin($client, $admin, 'password');
     }
 
     public function testUpdateUser()
     {
+        $user = UserFactory::new()
+            ->create()
+            ->enableAutoRefresh()
+        ;
+
         $client = self::createClient();
 
-        $user = $this->createUserAndLogin($client, 'test@test.fr', 'password');
+        // test not logged in, unauthorized
+        $this->testNotLoggedInUnauthorized($client, 'PUT', '/api/users/'.$user->getId());
 
+        // test user modifying other user
+        $this->createUserAndLogin($client, 'password');
         $client->request('PUT', '/api/users/'.$user->getId(), [
             'json' => [
-                'username' => 'updated'
+                'username' => 'test',
+                'password' => 'password'
             ]
         ]);
+        $this->assertResponseStatusCodeSame(403);
 
-        $this->assertResponseIsSuccessful();
-        $this->assertJsonContains([
-            'username' => 'updated'
+        // test user modifying himself with role admin
+        $this->login($client, $user->object(), 'password');
+        $client->request('PUT', '/api/users/'.$user->getId(), [
+            'json' => [
+                'username' => 'newusername',
+                'password' => 'newpassword',
+                'roles' => [
+                    'ROLE_ADMIN'
+                ]
+            ]
         ]);
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertEquals('newusername', $user->getUsername());
+        $data = $client->getResponse()->toArray();
+        $this->assertArrayNotHasKey('isAdmin', $data);
+        $this->login($client, $user->object(), 'newpassword');
+
+        // test admin modifying other user
+        $this->createUserAdminAndLogin($client, 'password');
+        $client->request('PUT', '/api/users/'.$user->getId(), [
+            'json' => [
+                'username' => 'newusernameadmin',
+                'password' => 'newpasswordadmin',
+                'roles' => [
+                    'ROLE_ADMIN'
+                ]
+            ]
+        ]);
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertEquals('newusernameadmin', $user->getUsername());
+        $this->assertJsonContains(['isAdmin' => true]);
+
+        $this->loginAdmin($client, $user->object(), 'newpasswordadmin');
     }
 
-    public function testGetUser()
+    public function testDeleteUser()
     {
+        $user = UserFactory::new(['username' => 'username'])
+            ->create()
+        ;
+
+        self::ensureKernelShutdown();
         $client = self::createClient();
-        $user = $this->createUserAndLogin($client, 'test@test.fr', 'password');
 
-        $user2 = $this->createUser('test2@test.fr', 'password');
+        $this->testNotLoggedInUnauthorized($client, 'DELETE', '/api/users/'.$user->getId());
 
-        $client->request('GET', '/api/users/'.$user2->getId());
+        // test forbidden
+        $this->createUserAndLogin($client, 'password');
+        $client->request('DELETE', '/api/users/'.$user->getId());
+        $this->assertResponseStatusCodeSame(403);
 
-        $this->assertJsonContains([
-            'username' => 'test2'
-        ]);
-        $data = $client->getResponse()->toArray();
-        $this->assertArrayNotHasKey('email', $data);
+        // test not found
+        $this->createUserAdminAndLogin($client, 'password');
+        $client->request('DELETE', '/api/users/test');
+        $this->assertResponseStatusCodeSame(404);
 
-        $em = $this->getEntityManager();
-        $user = $em->getRepository(User::class)->find($user->getId());
-        $user->setRoles(['ROLE_ADMIN']);
-        $em->persist($user);
-        $em->flush();
-
-        $this->login($client, 'test@test.fr', 'password');
-
-        $client->request('GET', '/api/users/'.$user2->getId());
-
-        $this->assertJsonContains([
-            'email' => 'test2@test.fr'
+        // test successful delete
+        $client->request('DELETE', '/api/users/'.$user->getId());
+        $this->assertResponseStatusCodeSame(204);
+        UserFactory::assert()->notExists([
+            'username' => 'username'
         ]);
     }
 }

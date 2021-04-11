@@ -19,6 +19,6 @@ use Symfony\Component\Validator\Constraint;
  */
 class MinimumCollectionItem extends Constraint
 {
-    public string $message = 'Collection cannot contain less than "{{ compared_value }}" items';
+    public string $message = 'Collection cannot contain less than {{ compared_value }} items';
     public int $min;
 }

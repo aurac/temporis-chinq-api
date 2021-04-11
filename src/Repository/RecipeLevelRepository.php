@@ -20,7 +20,7 @@ class RecipeLevelRepository extends ServiceEntityRepository
     }
 
     // /**
-    //  * @return RecipeLevel[] Returns an array of RecipeLevel objects
+    //  * @return RecipeLevelVoter[] Returns an array of RecipeLevelVoter objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class RecipeLevelRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?RecipeLevel
+    public function findOneBySomeField($value): ?RecipeLevelVoter
     {
         return $this->createQueryBuilder('r')
             ->andWhere('r.exampleField = :val')

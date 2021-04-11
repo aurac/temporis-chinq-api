@@ -28,9 +28,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *          },
  *          "delete" = { "security" = "is_granted('DELETE', object)" }
  *     },
- *     normalizationContext={"groups"={"card:read"}, "swagger_definition_name"="Read"},
- *     denormalizationContext={"groups"={"card:write"}},
- *     shortName="cards"
+ *     shortName="card"
  * )
  * @ORM\Entity(repositoryClass=CardRepository::class)
  * @ApiFilter(PropertyFilter::class)
@@ -48,27 +46,27 @@ class Card
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"card:read", "item:read", "recipe:read", "recipe:write","recipelevel:read", "recipelevel:write"})
+     * @Groups({"card:read", "item:read", "recipe:read", "recipe:write","recipe_level:read", "recipe_level:write"})
      */
-    private int $id;
+    private ?int $id = null;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"card:read", "card:write", "item:read", "recipe:read", "recipelevel:read"})
+     * @Groups({"card:read", "card:write", "item:read", "recipe:read", "recipe_level:read"})
      * @Assert\NotBlank
      */
     private string $name;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Groups({"card:read", "card:write", "item:read", "recipe:read", "recipelevel:read"})
+     * @Groups({"card:read", "card:write", "item:read", "recipe:read", "recipe_level:read"})
      * @Assert\GreaterThan(0)
      */
     private ?int $level;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"card:read", "card:write", "item:read", "recipe:read", "recipelevel:read"})
+     * @Groups({"card:read", "card:write", "item:read", "recipe:read", "recipe_level:read"})
      */
     private ?string $description;
 
@@ -87,21 +85,21 @@ class Card
     /**
      * @ORM\ManyToOne(targetEntity=CardType::class, inversedBy="cards")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"card:read", "card:write", "item:read", "recipe:read", "recipelevel:read"})
+     * @Groups({"card:read", "card:write", "item:read", "recipe:read", "recipe_level:read"})
      */
     private ?CardType $type;
 
     /**
      * @ORM\ManyToOne(targetEntity=Rarity::class, inversedBy="cards")
      * @ORM\JoinColumn(nullable=true)
-     * @Groups({"card:read", "card:write", "item:read", "recipe:read", "recipelevel:read"})
+     * @Groups({"card:read", "card:write", "item:read", "recipe:read", "recipe_level:read"})
      */
     private ?Rarity $rarity;
 
     /**
      * @ORM\ManyToOne(targetEntity=Source::class, inversedBy="cards")
      * @ORM\JoinColumn(nullable=true)
-     * @Groups({"card:read", "card:write", "item:read", "recipe:read", "recipelevel:read"})
+     * @Groups({"card:read", "card:write", "item:read", "recipe:read", "recipe_level:read"})
      */
     private ?Source $source;
 
@@ -110,7 +108,7 @@ class Card
      *
      * @ORM\ManyToOne(targetEntity=MediaObject::class)
      * @ORM\JoinColumn(nullable=true)
-     * @Groups({"card:read", "card:write", "item:read", "recipe:read", "recipelevel:read"})
+     * @Groups({"card:read", "card:write", "item:read", "recipe:read", "recipe_level:read"})
      */
     public ?MediaObject $imagePng;
 
@@ -119,7 +117,7 @@ class Card
      *
      * @ORM\ManyToOne(targetEntity=MediaObject::class)
      * @ORM\JoinColumn(nullable=true)
-     * @Groups({"card:read", "card:write", "item:read", "recipe:read", "recipelevel:read"})
+     * @Groups({"card:read", "card:write", "item:read", "recipe:read", "recipe_level:read"})
      */
     public ?MediaObject $imageSvg;
 

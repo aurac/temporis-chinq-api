@@ -22,13 +22,13 @@ class Rarity
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"card:read", "card:write", "item:read", "recipe:read", "recipelevel:read"})
+     * @Groups({"card:read", "card:write", "item:read", "recipe:read", "recipe_level:read"})
      */
     private int $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"card:read", "card:write", "item:read", "recipe:read", "recipelevel:read"})
+     * @Groups({"card:read", "card:write", "item:read", "recipe:read", "recipe_level:read"})
      */
     private string $name;
 

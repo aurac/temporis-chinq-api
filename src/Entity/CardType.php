@@ -10,7 +10,11 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *     collectionOperations={"get"},
+ *     itemOperations={"get"},
+ *     shortName="card_type"
+ * )
  * @ORM\Entity(repositoryClass=CardTypeRepository::class)
  */
 class CardType
@@ -19,13 +23,13 @@ class CardType
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"card:read", "card:write", "item:read", "recipe:read", "recipelevel:read"})
+     * @Groups({"card_type:read", "card:read", "card:write", "item:read", "recipe:read", "recipe_level:read"})
      */
     private int $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"card:read", "card:write", "item:read", "recipe:read", "recipelevel:read"})
+     * @Groups({"card_type:read", "card:read", "card:write", "item:read", "recipe:read", "recipe_level:read"})
      */
     private string $name;
 

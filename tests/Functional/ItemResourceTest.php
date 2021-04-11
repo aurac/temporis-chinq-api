@@ -1,9 +1,9 @@
 <?php
 /**
- * CardResourceTest.php
+ * ItemResourceTest.php
  *
  * @author Aurélien ADAM <aurelienadam96@gmail.com>
- * Date: 05/04/2021
+ * Date: 10/04/2021
  *
  * @version 1.0
  */
@@ -11,148 +11,150 @@
 namespace App\Tests\Functional;
 
 
-use App\Factory\CardFactory;
-use App\Factory\CardTypeFactory;
+use App\Factory\ItemFactory;
+use App\Factory\SubTypeFactory;
 use App\Test\CustomApiTestCase;
 
 /**
- * Class CardResourceTest
+ * Class ItemResourceTest
  * @package App\Tests\Functional
- * @group cards
+ * @group items
  */
-class CardResourceTest extends CustomApiTestCase
+class ItemResourceTest extends CustomApiTestCase
 {
-    public function testGetCollectionCard()
+    public function testGetCollectionItem()
     {
         $client = self::createClient();
 
         // test not logged in, unauthorized
-        $this->testNotLoggedInUnauthorized($client, 'GET', '/api/cards');
+        $this->testNotLoggedInUnauthorized($client, 'GET', '/api/items');
 
         // test logged in, success
         $this->createUserAndLogin($client, 'password');
-        $client->request('GET', '/api/cards');
+        $client->request('GET', '/api/items');
         $this->assertResponseStatusCodeSame(200);
     }
 
-    public function testGetItemCard()
+    public function testGetItemItem()
     {
-        $card = CardFactory::createOne();
+        $item = ItemFactory::createOne();
 
         self::ensureKernelShutdown();
         $client = self::createClient();
 
         // test not logged in, unauthorized
-        $this->testNotLoggedInUnauthorized($client, 'GET', '/api/cards/'.$card->getId());
+        $this->testNotLoggedInUnauthorized($client, 'GET', '/api/items/'.$item->getId());
 
         $this->createUserAndLogin($client, 'password');
 
         // test not found
-        $client->request('GET', '/api/cards/test');
+        $client->request('GET', '/api/items/test');
         $this->assertResponseStatusCodeSame(404);
 
         // test success
-        $client->request('GET', '/api/cards/'.$card->getId());
+        $client->request('GET', '/api/items/'.$item->getId());
         $this->assertResponseStatusCodeSame(200);
     }
 
-    public function testCreateCard()
+    public function testCreateItem()
     {
-        $cardType = CardTypeFactory::createOne();
+        $subType = SubTypeFactory::createOne();
 
         self::ensureKernelShutdown();
         $client = self::createClient();
 
         // test not logged in, unauthorized
-        $this->testNotLoggedInUnauthorized($client, 'POST', '/api/cards');
+        $this->testNotLoggedInUnauthorized($client, 'POST', '/api/items');
 
         // test forbidden
         $this->createUserAndLogin($client, 'password');
-        $client->request('POST', '/api/cards', [
+        $client->request('POST', '/api/items', [
             'json' => []
         ]);
         $this->assertResponseStatusCodeSame(403);
 
         // test missing data
         $this->createUserAdminAndLogin($client, 'password');
-        $client->request('POST', '/api/cards', [
+        $client->request('POST', '/api/items', [
             'json' => []
         ]);
         $this->assertResponseStatusCodeSame(422);
 
         // test created success
-        $client->request('POST', '/api/cards', [
+        $client->request('POST', '/api/items', [
             'json' => [
-                'type' => '/api/card_types/'.$cardType->getId(),
-                'name' => 'Card test',
+                'subType' => '/api/sub_types/'.$subType->getId(),
+                'name' => 'Item test',
                 'level' => 10,
-                'description' => '',
             ]
         ]);
         $this->assertResponseStatusCodeSame(201);
-        CardFactory::assert()->exists([
-            'name' => 'Card test',
+        ItemFactory::assert()->exists([
+            'name' => 'Item test',
             'level' => 10,
         ]);
     }
 
-    public function testUpdateCard()
+    public function testUpdateItem()
     {
-        $card = CardFactory::createOne();
+        $item = ItemFactory::createOne(['level' => 10]);
 
         self::ensureKernelShutdown();
         $client = self::createClient();
 
-        $this->testNotLoggedInUnauthorized($client, 'PUT', '/api/cards/'.$card->getId());
+        $this->testNotLoggedInUnauthorized($client, 'PUT', '/api/items/'.$item->getId());
 
         // test forbidden
         $this->createUserAndLogin($client, 'password');
-        $client->request('PUT', '/api/cards/'.$card->getId(), [
+        $client->request('PUT', '/api/items/'.$item->getId(), [
             'json' => [
-                'description' => 'New card description'
+                'level' => 20
             ]
         ]);
         $this->assertResponseStatusCodeSame(403);
 
         // test not found
         $this->createUserAdminAndLogin($client, 'password');
-        $client->request('PUT', '/api/cards/test', [
+        $client->request('PUT', '/api/items/test', [
             'json' => [
-                'description' => 'New card description'
+                'level' => 20
             ]
         ]);
         $this->assertResponseStatusCodeSame(404);
 
         // test successful update
-        $client->request('PUT', '/api/cards/'.$card->getId(), [
+        $client->request('PUT', '/api/items/'.$item->getId(), [
             'json' => [
-                'description' => 'New card description'
+                'level' => 20
             ]
         ]);
         $this->assertResponseStatusCodeSame(200);
+        ItemFactory::assert()->exists([
+            'level' => 20
+        ]);
     }
 
-    public function testDeleteCard()
+    public function testDeleteItem()
     {
-        $card = CardFactory::createOne();
+        $item = ItemFactory::createOne();
 
         self::ensureKernelShutdown();
         $client = self::createClient();
 
-        $this->testNotLoggedInUnauthorized($client, 'DELETE', '/api/cards/'.$card->getId());
+        $this->testNotLoggedInUnauthorized($client, 'DELETE', '/api/items/'.$item->getId());
 
         // test forbidden
         $this->createUserAndLogin($client, 'password');
-        $client->request('DELETE', '/api/cards/'.$card->getId());
+        $client->request('DELETE', '/api/items/'.$item->getId());
         $this->assertResponseStatusCodeSame(403);
 
         // test not found
         $this->createUserAdminAndLogin($client, 'password');
-        $client->request('DELETE', '/api/cards/test');
+        $client->request('DELETE', '/api/items/test');
         $this->assertResponseStatusCodeSame(404);
 
         // test successful delete
-        $client->request('DELETE', '/api/cards/'.$card->getId());
+        $client->request('DELETE', '/api/items/'.$item->getId());
         $this->assertResponseStatusCodeSame(204);
     }
 }

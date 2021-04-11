@@ -2,8 +2,11 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -15,26 +18,24 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository", repositoryClass=UserRepository::class)
  * @ORM\Table(name="`user`")
  * @ApiResource(
- *     security="is_granted('ROLE_USER')",
  *     collectionOperations={
  *         "get",
  *         "post" = {
- *             "security" = "is_granted('IS_AUTHENTICATED_ANONYMOUSLY')",
- *             "validation_groups" = { "default", "create" }
+ *             "security" = "is_granted('CREATE')"
  *          }
  *     },
  *     itemOperations={
  *          "get",
  *          "put" = {
- *              "security" = "is_granted('ROLE_USER') and object == user"
+ *              "security" = "is_granted('EDIT', object)"
  *          },
- *          "delete" = { "security" = "is_granted('ROLE_ADMIN')" }
+ *          "delete" = { "security" = "is_granted('DELETE', object)" }
  *     },
  *     normalizationContext={"groups"={"user:read"}},
  *     denormalizationContext={"groups"={"user:write"}},
- *     shortName="users"
+ *     shortName="user"
  * )
- * @UniqueEntity(fields={"email"})
+ * @UniqueEntity(fields={"username"})
  */
 class User implements UserInterface
 {
@@ -47,16 +48,15 @@ class User implements UserInterface
     private int $id;
 
     /**
-     * @ORM\Column(type="string", length=180, unique=true)
-     * @Groups({"owner:read", "user:write"})
+     * @ORM\Column(type="string", length=255)
+     * @Groups({"user:read", "user:write", "recipe:read"})
      * @Assert\NotBlank()
-     * @Assert\Email()
      */
-    private string $email;
+    private string $username;
 
     /**
      * @ORM\Column(type="json")
-     * @Groups({"user:write"})
+     * @Groups({"admin:write"})
      */
     private array $roles = [];
 
@@ -74,26 +74,24 @@ class User implements UserInterface
     private ?string $plainPassword = null;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Groups({"user:write", "user:read"})
+     * @var bool Property viewable only by users with ROLE_ADMIN
+     *
      */
-    private string $username;
+    private bool $isAdmin;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Recipe::class, mappedBy="createdBy")
+     */
+    private $recipes;
+
+    public function __construct()
+    {
+        $this->recipes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
-
-        return $this;
     }
 
     /**
@@ -179,5 +177,46 @@ class User implements UserInterface
         $this->username = $username;
 
         return $this;
+    }
+
+    /**
+     * @return Collection|Recipe[]
+     */
+    public function getRecipes(): Collection
+    {
+        return $this->recipes;
+    }
+
+    public function addRecipe(Recipe $recipe): self
+    {
+        if (!$this->recipes->contains($recipe)) {
+            $this->recipes[] = $recipe;
+            $recipe->setCreatedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRecipe(Recipe $recipe): self
+    {
+        if ($this->recipes->removeElement($recipe)) {
+            // set the owning side to null (unless already changed)
+            if ($recipe->getCreatedBy() === $this) {
+                $recipe->setCreatedBy(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     *
+     * @Groups({"admin:read"})
+     * @SerializedName("isAdmin")
+     */
+    public function isAdmin(): bool
+    {
+        return in_array('ROLE_ADMIN', $this->roles);
     }
 }

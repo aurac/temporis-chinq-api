@@ -13,10 +13,9 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ApiResource(
  *     collectionOperations={"get"},
  *     itemOperations={
- *          "get"={}
+ *          "get"
  *     },
- *     normalizationContext={"groups"={"subtype:read"}, "swagger_definition_name"="Read"},
- *     shortName="sub_types",
+ *     shortName="sub_type",
  *     attributes={
  *          "pagination_enabled"=false
  *     }
@@ -33,20 +32,20 @@ class SubType
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"subtype:read", "item:read", "card:read", "type:read"})
+     * @Groups({"sub_type:read", "item:read", "card:read", "type:read"})
      */
     private int $id;
 
     /**
      * @ORM\ManyToOne(targetEntity=Type::class, inversedBy="subTypes")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"subtype:read", "item:read", "card:read"})
+     * @Groups({"sub_type:read", "item:read", "card:read"})
      */
     private Type $type;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"subtype:read", "item:read", "card:read", "type:read"})
+     * @Groups({"sub_type:read", "item:read", "card:read", "type:read"})
      */
     private string $name;
 

@@ -14,74 +14,81 @@ namespace App\Test;
 use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\ApiTestCase;
 use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\Client;
 use App\Entity\User;
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use App\Factory\UserFactory;
+use Symfony\Contracts\HttpClient\ResponseInterface;
+use Zenstruck\Foundry\Test\Factories;
+use Zenstruck\Foundry\Test\ResetDatabase;
 
 class CustomApiTestCase extends ApiTestCase
 {
-    protected function createUser(string $email, string $password): User
+    use ResetDatabase, Factories;
+
+    protected function createUser(string $password): User
     {
-        $user = new User();
-        $user->setEmail($email);
-        $user->setUsername(substr($email, 0, strpos($email, '@')));
-
-        $encoded = self::$container->get(UserPasswordEncoderInterface::class)
-            ->encodePassword($user, $password);
-
-        $user->setPassword($encoded);
-
-        $em = self::$container->get(EntityManagerInterface::class);
-        $em->persist($user);
-        $em->flush();
-
-        return $user;
+        return UserFactory::new(['password' => $password])
+            ->create()
+            ->object()
+        ;
     }
 
-    protected function login(Client $client, string $email, string $password)
+    protected function createUserAdmin(string $password): User
     {
-        $client->request('POST', '/login', [
+        return UserFactory::new(['password' => $password])
+            ->admin()
+            ->create()
+            ->object()
+        ;
+    }
+
+    protected function login(Client $client, User $user, string $password): ResponseInterface
+    {
+        $response = $client->request('POST', '/login', [
             'json' => [
-                'email' => $email,
+                'username' => $user->getUsername(),
                 'password' => $password
             ]
         ]);
 
+        $this->assertResponseStatusCodeSame(204);
+        $this->assertResponseHasHeader('Location', '/api/users/'.$user->getId());
+
+        return $response;
+    }
+
+    protected function loginAdmin(Client $client, User $user, string $password): ResponseInterface
+    {
+        $response = $this->login($client, $user, $password);
+
+        $headers = $response->getHeaders();
+
+        $client->request('GET', $headers['location'][0]);
         $this->assertResponseStatusCodeSame(200);
+        $this->assertJsonContains(['isAdmin' => true]);
+
+        return $response;
     }
 
-    protected function createUserAdmin(string $email, string $password): User
+    protected function createUserAndLogin(Client $client, string $password): User
     {
-        $user = $this->createUser($email, $password);
-        $user->setRoles(['ROLE_ADMIN']);
+        $user = $this->createUser($password);
 
-        $em = self::$container->get(EntityManagerInterface::class);
-        $em->persist($user);
-        $em->flush();
+        $this->login($client, $user, $password);
 
         return $user;
     }
 
-
-    protected function createUserAndLogin(Client $client, string $email, string $password): User
+    protected function createUserAdminAndLogin(Client $client, string $password): User
     {
-        $user = $this->createUser($email, $password);
+        $user = $this->createUserAdmin($password);
 
-        $this->login($client, $email, $password);
+        $this->loginAdmin($client, $user, $password);
 
         return $user;
     }
 
-    protected function createUserAdminAndLogin(Client $client, string $email, string $password): User
+    protected function testNotLoggedInUnauthorized($client, $method, $route)
     {
-        $user = $this->createUserAdmin($email, $password);
-
-        $this->login($client, $email, $password);
-
-        return $user;
-    }
-
-    protected function getEntityManager(): EntityManagerInterface
-    {
-        return self::$container->get(EntityManagerInterface::class);
+        $client->request($method, $route, ['json'=>[]]);
+        $this->assertResponseStatusCodeSame(401);
     }
 }

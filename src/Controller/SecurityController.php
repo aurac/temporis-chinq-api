@@ -14,22 +14,25 @@ use ApiPlatform\Core\Api\IriConverterInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Serializer\SerializerInterface;
 
 class SecurityController extends AbstractController
 {
     /**
      * @Route("/login", name="app_login", methods={"POST"})
+     * @param IriConverterInterface $iriConverter
+     * @return \Symfony\Component\HttpFoundation\JsonResponse|Response
      */
-    public function login(IriConverterInterface $iriConverter, SerializerInterface $serializer)
+    public function login(IriConverterInterface $iriConverter)
     {
         if (!$this->isGranted('IS_AUTHENTICATED_FULLY')) {
             return $this->json([
                 'error' => 'Invalid login request'
-            ], 400);
+            ], Response::HTTP_BAD_REQUEST);
         }
 
-        return new Response($serializer->serialize($this->getUser(), 'jsonld'), 200);
+        return new Response(null, Response::HTTP_NO_CONTENT,
+            ['Location' => $iriConverter->getIriFromItem($this->getUser())]
+        );
     }
 
     /**

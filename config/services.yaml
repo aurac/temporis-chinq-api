@@ -67,9 +67,27 @@ services:
         arguments:
             $projectDir: '%kernel.project_dir%'
 
-    App\Serializer\MediaObjectContentUrlNormalizer:
+    App\Serializer\Normalizer\MediaObjectContentUrlNormalizer:
         decorates: 'api_platform.serializer.normalizer.item'
 
     app.serializer.normalizer.jsonld.media_object:
-        class: App\Serializer\MediaObjectContentUrlNormalizer
+        class: App\Serializer\Normalizer\MediaObjectContentUrlNormalizer
         decorates: 'api_platform.jsonld.normalizer.item'
+
+    App\Serializer\DefaultGroupsContextBuilder:
+        decorates: 'api_platform.serializer.context_builder'
+        arguments: [ '@App\Serializer\DefaultGroupsContextBuilder.inner' ]
+        autoconfigure: false
+
+    App\ApiPlatform\AutoGroupResourceMetadataFactory:
+        decorates: 'api_platform.metadata.resource.metadata_factory'
+        arguments: [ '@App\ApiPlatform\AutoGroupResourceMetadataFactory.inner' ]
+
+    App\Factory\MediaObjectFactory:
+        arguments:
+            $uploadDir: '%upload_destination%'
+        tags: ['foundry.factory']
+
+    App\Doctrine\:
+        resource: '../src/Doctrine/'
+        tags: ['doctrine.orm.entity_listener']
