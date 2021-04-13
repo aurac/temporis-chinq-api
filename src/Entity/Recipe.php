@@ -18,16 +18,16 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ApiResource(
  *     collectionOperations={"get", "post"},
  *     itemOperations={
- *          "get"={},
- *          "put"
+ *          "get",
+ *          "put",
+ *          "delete" = { "security" = "is_granted('DELETE', object)" },
  *     },
- *     normalizationContext={"groups"={"recipe:read"}, "swagger_definition_name"="Read"},
- *     denormalizationContext={"groups"={"recipe:write"}},
- *     shortName="recipes"
+ *     shortName="recipe"
  * )
- * @ORM\Entity(repositoryClass=RecipeRepository::class)
  * @ApiFilter(PropertyFilter::class)
  * @ApiFilter(RecipeSearchFilter::class)
+ * @ORM\Entity(repositoryClass=RecipeRepository::class)
+ * @ORM\EntityListeners({"App\Doctrine\RecipeListener"})
  */
 class Recipe
 {
@@ -43,6 +43,7 @@ class Recipe
      * @ORM\ManyToOne(targetEntity=Item::class, inversedBy="recipes")
      * @ORM\JoinColumn(nullable=false)
      * @Groups({"recipe:read", "recipe:write", "card:read"})
+     * @Assert\NotBlank
      */
     private ?Item $item;
 
@@ -54,6 +55,18 @@ class Recipe
      * @RecipeAssert\MinimumCollectionItem(min="5")
      */
     private Collection $cards;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="recipes")
+     * @Groups({"recipe:read"})
+     */
+    private ?User $createdBy = null;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class)
+     * @Groups({"recipe:read"})
+     */
+    private ?User $updatedBy = null;
 
     public function __construct()
     {
@@ -97,6 +110,30 @@ class Recipe
     public function removeCard(Card $card): self
     {
         $this->cards->removeElement($card);
+
+        return $this;
+    }
+
+    public function getCreatedBy(): ?User
+    {
+        return $this->createdBy;
+    }
+
+    public function setCreatedBy(?User $createdBy): self
+    {
+        $this->createdBy = $createdBy;
+
+        return $this;
+    }
+
+    public function getUpdatedBy(): ?User
+    {
+        return $this->updatedBy;
+    }
+
+    public function setUpdatedBy(?User $updatedBy): self
+    {
+        $this->updatedBy = $updatedBy;
 
         return $this;
     }

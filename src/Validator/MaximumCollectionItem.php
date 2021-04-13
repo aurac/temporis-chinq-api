@@ -18,6 +18,6 @@ use Symfony\Component\Validator\Constraint;
  */
 class MaximumCollectionItem extends Constraint
 {
-    public $message = 'Collection cannot contain more than "{{ compared_value }}" items';
+    public $message = 'Collection cannot contain more than {{ compared_value }} items';
     public $max;
 }

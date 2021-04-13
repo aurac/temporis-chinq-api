@@ -17,19 +17,22 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ApiResource(
- *     collectionOperations={"get"},
- *     itemOperations={
- *          "get"={},
- *          "put"
+ *     collectionOperations={
+ *          "get",
+ *          "post" = { "security" = "is_granted('CREATE')" },
  *     },
- *     normalizationContext={"groups"={"recipelevel:read"}, "swagger_definition_name"="Read"},
- *     denormalizationContext={"groups"={"recipelevel:write"}},
- *     shortName="recipe_levels"
+ *     itemOperations={
+ *          "get",
+ *          "put",
+ *          "delete" = { "security" = "is_granted('DELETE', object)" },
+ *     },
+ *     shortName="recipe_level"
  * )
- * @ORM\Entity(repositoryClass=RecipeLevelRepository::class)
  * @ApiFilter(PropertyFilter::class)
  * @UniqueEntity(fields={"level"})
  * @ApiFilter(RecipeSearchFilter::class)
+ * @ORM\Entity(repositoryClass=RecipeLevelRepository::class)
+ * @ORM\EntityListeners({"App\Doctrine\RecipeLevelListener"})
  */
 class RecipeLevel
 {
@@ -37,23 +40,28 @@ class RecipeLevel
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"recipelevel:read", "card:read"})
+     * @Groups({"recipe_level:read", "card:read"})
      */
     private int $id;
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups({"recipelevel:read", "card:read"})
+     * @Groups({"recipe_level:read", "recipe_level:write", "card:read"})
      */
     private int $level;
 
     /**
      * @ORM\ManyToMany(targetEntity=Card::class, inversedBy="recipeLevels")
-     * @Groups({"recipelevel:read", "recipelevel:write"})
+     * @Groups({"recipe_level:read", "recipe_level:write"})
      * @RecipeAssert\MaximumCollectionItem(max="5")
      * @RecipeAssert\MinimumCollectionItem(min="5")
      */
     private Collection $cards;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class)
+     */
+    private ?User $updatedBy;
 
     public function __construct()
     {
@@ -97,6 +105,18 @@ class RecipeLevel
     public function removeCard(Card $card): self
     {
         $this->cards->removeElement($card);
+
+        return $this;
+    }
+
+    public function getUpdatedBy(): ?User
+    {
+        return $this->updatedBy;
+    }
+
+    public function setUpdatedBy(?User $updatedBy): self
+    {
+        $this->updatedBy = $updatedBy;
 
         return $this;
     }

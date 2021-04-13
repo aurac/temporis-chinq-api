@@ -114,6 +114,9 @@
     "doctrine/sql-formatter": {
         "version": "1.1.1"
     },
+    "fakerphp/faker": {
+        "version": "v1.14.1"
+    },
     "fig/link-util": {
         "version": "1.1.2"
     },
@@ -189,6 +192,9 @@
     "symfony/asset": {
         "version": "v5.2.4"
     },
+    "symfony/browser-kit": {
+        "version": "v5.2.4"
+    },
     "symfony/cache": {
         "version": "v5.2.6"
     },
@@ -209,6 +215,9 @@
         "files": [
             "bin/console"
         ]
+    },
+    "symfony/css-selector": {
+        "version": "v5.2.4"
     },
     "symfony/debug-bundle": {
         "version": "4.1",
@@ -233,6 +242,9 @@
     },
     "symfony/doctrine-bridge": {
         "version": "v5.2.6"
+    },
+    "symfony/dom-crawler": {
+        "version": "v5.2.4"
     },
     "symfony/dotenv": {
         "version": "v5.2.4"
@@ -290,6 +302,9 @@
             "src/Kernel.php"
         ]
     },
+    "symfony/http-client": {
+        "version": "v5.2.6"
+    },
     "symfony/http-client-contracts": {
         "version": "v2.3.1"
     },
@@ -337,6 +352,21 @@
     },
     "symfony/orm-pack": {
         "version": "v2.1.0"
+    },
+    "symfony/phpunit-bridge": {
+        "version": "5.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "5.1",
+            "ref": "bf16921ef8309a81d9f046e9b6369c46bcbd031f"
+        },
+        "files": [
+            ".env.test",
+            "bin/phpunit",
+            "phpunit.xml.dist",
+            "tests/bootstrap.php"
+        ]
     },
     "symfony/polyfill-intl-grapheme": {
         "version": "v1.22.1"
@@ -503,5 +533,21 @@
     },
     "willdurand/negotiation": {
         "version": "3.0.0"
+    },
+    "zenstruck/callback": {
+        "version": "v1.2.0"
+    },
+    "zenstruck/foundry": {
+        "version": "1.9",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "1.9",
+            "ref": "e03ffeeb52fd76e99f2c527ecddc9c986cb194e5"
+        },
+        "files": [
+            "config/packages/dev/zenstruck_foundry.yaml",
+            "config/packages/test/zenstruck_foundry.yaml"
+        ]
     }
 }

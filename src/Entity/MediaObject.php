@@ -66,7 +66,7 @@ class MediaObject
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue
      * @ORM\Id
-     * @Groups({"card:read", "card:write", "item:read", "recipe:read", "recipelevel:read"})
+     * @Groups({"card:read", "card:write", "item:read", "recipe:read", "recipe_level:read"})
      */
     protected int $id;
 

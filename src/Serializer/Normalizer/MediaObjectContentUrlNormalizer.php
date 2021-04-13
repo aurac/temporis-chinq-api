@@ -8,7 +8,7 @@
  * @version 1.0
  */
 
-namespace App\Serializer;
+namespace App\Serializer\Normalizer;
 
 use App\Entity\MediaObject;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;

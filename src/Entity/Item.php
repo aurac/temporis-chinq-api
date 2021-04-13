@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\RangeFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Core\Serializer\Filter\PropertyFilter;
@@ -16,22 +17,23 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource(
- *     collectionOperations={"get", "post"},
+ *     collectionOperations={
+ *          "get",
+ *          "post" = { "security" = "is_granted('CREATE')" },
+ *     },
  *     itemOperations={
  *          "get"={
  *              "normalization_context"={"groups"={"item:read", "item:item:get"}}
+ *          },
+ *          "put" = { "security" = "is_granted('EDIT', object)" },
+ *          "delete" = { "security" = "is_granted('DELETE', object)" }
  *     },
- *          "put"
- *     },
- *     normalizationContext={"groups"={"item:read"}, "swagger_definition_name"="Read"},
- *     denormalizationContext={"groups"={"item:write"}},
- *     shortName="items",
+ *     shortName="item",
  *     attributes={
  *          "pagination_items_per_page"=30,
  *          "formats"={"jsonld", "html", "json", "jsonhal", "csv"={"text/csv"}}
  *     }
  * )
- * @ORM\Entity(repositoryClass=ItemRepository::class)
  * @ApiFilter(SearchFilter::class, properties={
  *     "name": "ipartial",
  *     "level": "exact",
@@ -42,6 +44,16 @@ use Symfony\Component\Validator\Constraints as Assert;
  * })
  * @ApiFilter(RangeFilter::class, properties={"level"})
  * @ApiFilter(PropertyFilter::class)
+ * @ApiFilter(OrderFilter::class,
+ *     properties={
+ *          "name",
+ *          "level"
+ *     },
+ *     arguments={
+ *          "orderParameterName"="order"
+ *     }
+ * )
+ * @ORM\Entity(repositoryClass=ItemRepository::class)
  */
 class Item
 {
@@ -103,7 +115,7 @@ class Item
      *
      * @ORM\ManyToOne(targetEntity=MediaObject::class)
      * @ORM\JoinColumn(nullable=true)
-     * @Groups({"card:read", "item:read", "recipe:read", "recipelevel:read"})
+     * @Groups({"card:read", "item:read", "recipe:read", "recipe_level:read"})
      */
     public ?MediaObject $image;
 

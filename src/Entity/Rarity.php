@@ -12,7 +12,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @ApiResource(
  *     collectionOperations={"get"},
- *     itemOperations={"get"}
+ *     itemOperations={"get"},
+ *     shortName="rarity"
  * )
  * @ORM\Entity(repositoryClass=RarityRepository::class)
  */
@@ -22,13 +23,13 @@ class Rarity
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"card:read", "card:write", "item:read", "recipe:read", "recipelevel:read"})
+     * @Groups({"rarity:read", "card:read", "card:write", "item:read", "recipe:read", "recipe_level:read"})
      */
     private int $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"card:read", "card:write", "item:read", "recipe:read", "recipelevel:read"})
+     * @Groups({"rarity:read", "card:read", "card:write", "item:read", "recipe:read", "recipe_level:read"})
      */
     private string $name;
 

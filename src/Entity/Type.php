@@ -17,9 +17,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *     itemOperations={
  *          "get"={}
  *     },
- *     normalizationContext={"groups"={"type:read"}, "swagger_definition_name"="Read"},
- *     denormalizationContext={"groups"={"type:write"}},
- *     shortName="types",
+ *     shortName="type",
  *     attributes={
  *          "pagination_enabled"=false
  *     }
@@ -35,13 +33,13 @@ class Type
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"type:read", "subtype:read", "item:read"})
+     * @Groups({"type:read", "sub_type:read", "item:read"})
      */
     private int $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"type:read", "subtype:read", "item:read"})
+     * @Groups({"type:read", "sub_type:read", "item:read"})
      */
     private string $name;
 
