@@ -63,7 +63,7 @@ class Recipe
     private ?User $createdBy = null;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="recipes")
+     * @ORM\ManyToOne(targetEntity=User::class)
      * @Groups({"recipe:read"})
      */
     private ?User $updatedBy = null;

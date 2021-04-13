@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\RangeFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Core\Serializer\Filter\PropertyFilter;
@@ -43,6 +44,15 @@ use Symfony\Component\Validator\Constraints as Assert;
  * })
  * @ApiFilter(RangeFilter::class, properties={"level"})
  * @ApiFilter(PropertyFilter::class)
+ * @ApiFilter(OrderFilter::class,
+ *     properties={
+ *          "name",
+ *          "level"
+ *     },
+ *     arguments={
+ *          "orderParameterName"="order"
+ *     }
+ * )
  * @ORM\Entity(repositoryClass=ItemRepository::class)
  */
 class Item

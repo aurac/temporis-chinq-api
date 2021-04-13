@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Core\Serializer\Filter\PropertyFilter;
 use App\Repository\CardRepository;
@@ -30,7 +31,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     },
  *     shortName="card"
  * )
- * @ORM\Entity(repositoryClass=CardRepository::class)
  * @ApiFilter(PropertyFilter::class)
  * @ApiFilter(SearchFilter::class, properties={
  *     "name": "ipartial",
@@ -39,6 +39,16 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     "type.id": "exact",
  *     "recipes.item.name":"ipartial"
  * })
+ * @ApiFilter(OrderFilter::class,
+ *     properties={
+ *          "level",
+ *          "name"
+ *     },
+ *     arguments={
+ *          "orderParameterName"="order"
+ *     }
+ * )
+ * @ORM\Entity(repositoryClass=CardRepository::class)
  */
 class Card
 {
