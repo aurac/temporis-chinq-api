@@ -26,7 +26,10 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *          "put",
  *          "delete" = { "security" = "is_granted('DELETE', object)" },
  *     },
- *     shortName="recipe_level"
+ *     shortName="recipe_level",
+ *     attributes={
+ *          "pagination_enabled"=false
+ *     }
  * )
  * @ApiFilter(PropertyFilter::class)
  * @UniqueEntity(fields={"level"})
