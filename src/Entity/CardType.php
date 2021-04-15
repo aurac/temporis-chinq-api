@@ -23,13 +23,13 @@ class CardType
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"card_type:read", "card:read", "card:write", "item:read", "recipe:read", "recipe_level:read"})
+     * @Groups({"card_type:read", "card:read", "card:write", "item:read", "recipe:read"})
      */
     private int $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"card_type:read", "card:read", "card:write", "item:read", "recipe:read", "recipe_level:read"})
+     * @Groups({"card_type:read", "card:read", "card:write", "item:read", "recipe:read"})
      */
     private string $name;
 

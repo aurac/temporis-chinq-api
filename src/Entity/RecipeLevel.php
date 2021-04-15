@@ -4,10 +4,10 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Core\Serializer\Filter\PropertyFilter;
 use App\Filter\RecipeSearchFilter;
 use App\Repository\RecipeLevelRepository;
-use App\Validator as RecipeAssert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -32,8 +32,16 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *     }
  * )
  * @ApiFilter(PropertyFilter::class)
- * @UniqueEntity(fields={"level"})
  * @ApiFilter(RecipeSearchFilter::class)
+ * @ApiFilter(OrderFilter::class,
+ *     properties={
+ *          "level"
+ *     },
+ *     arguments={
+ *          "orderParameterName"="order"
+ *     }
+ * )
+ * @UniqueEntity(fields={"level"})
  * @ORM\Entity(repositoryClass=RecipeLevelRepository::class)
  * @ORM\EntityListeners({"App\Doctrine\RecipeLevelListener"})
  */
@@ -49,15 +57,13 @@ class RecipeLevel
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups({"recipe_level:read", "recipe_level:write", "card:read"})
+     * @Groups({"recipe_level:read", "card:read"})
      */
     private int $level;
 
     /**
      * @ORM\ManyToMany(targetEntity=Card::class, inversedBy="recipeLevels")
      * @Groups({"recipe_level:read", "recipe_level:write"})
-     * @RecipeAssert\MaximumCollectionItem(max="5")
-     * @RecipeAssert\MinimumCollectionItem(min="5")
      */
     private Collection $cards;
 
@@ -65,6 +71,12 @@ class RecipeLevel
      * @ORM\ManyToOne(targetEntity=User::class)
      */
     private ?User $updatedBy;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     * @Groups({"recipe_level:read", "recipe_level:write"})
+     */
+    private ?string $description;
 
     public function __construct()
     {
@@ -120,6 +132,18 @@ class RecipeLevel
     public function setUpdatedBy(?User $updatedBy): self
     {
         $this->updatedBy = $updatedBy;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }

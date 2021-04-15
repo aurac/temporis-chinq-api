@@ -23,20 +23,20 @@ class Source
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"source:read", "card:read", "card:write", "item:read", "recipe:read", "recipe_level:read"})
+     * @Groups({"source:read", "card:read", "card:write", "item:read", "recipe:read"})
      */
     private int $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"source:read", "card:read", "card:write", "item:read", "recipe:read", "recipe_level:read"})
+     * @Groups({"source:read", "card:read", "card:write", "item:read", "recipe:read"})
      */
     private string $name;
 
     /**
      * @ORM\ManyToOne(targetEntity=Source::class)
      * @ORM\JoinColumn(nullable=true)
-     * @Groups({"source:read", "card:read", "card:write", "item:read", "recipe:read", "recipe_level:read"})
+     * @Groups({"source:read", "card:read", "card:write", "item:read", "recipe:read"})
      */
     private ?Source $parent;
 

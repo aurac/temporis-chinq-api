@@ -95,21 +95,21 @@ class Card
     /**
      * @ORM\ManyToOne(targetEntity=CardType::class, inversedBy="cards")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"card:read", "card:write", "item:read", "recipe:read", "recipe_level:read"})
+     * @Groups({"card:read", "card:write", "item:read", "recipe:read"})
      */
     private ?CardType $type;
 
     /**
      * @ORM\ManyToOne(targetEntity=Rarity::class, inversedBy="cards")
      * @ORM\JoinColumn(nullable=true)
-     * @Groups({"card:read", "card:write", "item:read", "recipe:read", "recipe_level:read"})
+     * @Groups({"card:read", "card:write", "item:read", "recipe:read"})
      */
     private ?Rarity $rarity;
 
     /**
      * @ORM\ManyToOne(targetEntity=Source::class, inversedBy="cards")
      * @ORM\JoinColumn(nullable=true)
-     * @Groups({"card:read", "card:write", "item:read", "recipe:read", "recipe_level:read"})
+     * @Groups({"card:read", "card:write", "item:read", "recipe:read"})
      */
     private ?Source $source;
 
