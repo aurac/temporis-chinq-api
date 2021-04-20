@@ -60,7 +60,7 @@ class DownloadCardImagesCommand extends Command
             foreach ($arrExt as $extension) {
                 $url = $this->urlCardImage.'/'.$extension.'/'.$item['id'].'.'.$extension;
 
-                $fileName = $this->cardService->cardNameToFileName($item['name']).'.'.$extension;
+                $fileName = $item['id'].'.'.$extension;
                 $img = $this->uploadDir.'/images/'.$extension.'/'.$fileName;
 
                 if (file_exists($img)) {

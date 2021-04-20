@@ -65,6 +65,7 @@ class CardImporter
             $card = new Card();
             $card->setName($item['name'])
                 ->setType($type)
+                ->setExternalId($item['id'])
             ;
 
             if (isset($item['level'])) {
@@ -143,7 +144,7 @@ class CardImporter
         $arrExt = ['png', 'svg'];
 
         foreach ($arrExt as $ext) {
-            $fileName = 'images/'.$ext.'/'.$this->cardNameToFileName($card->getName()).'.'.$ext;
+            $fileName = 'images/'.$ext.'/'.$card->getExternalId().'.'.$ext;
 
             $mediaObject = $this->getMediaObject($fileName);
 

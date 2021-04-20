@@ -131,6 +131,11 @@ class Card
      */
     public ?MediaObject $imageSvg;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $externalId;
+
     public function __construct()
     {
         $this->recipes = new ArrayCollection();
@@ -293,6 +298,18 @@ class Card
     public function setImageSvg(?MediaObject $imageSvg): self
     {
         $this->imageSvg = $imageSvg;
+
+        return $this;
+    }
+
+    public function getExternalId(): ?int
+    {
+        return $this->externalId;
+    }
+
+    public function setExternalId(?int $externalId): self
+    {
+        $this->externalId = $externalId;
 
         return $this;
     }

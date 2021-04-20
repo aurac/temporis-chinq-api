@@ -63,6 +63,12 @@ services:
         tags:
             - { name: 'console.command' }
 
+    App\Command\ImportRecipeLevelsCommand:
+        arguments:
+            $projectDir: '%kernel.project_dir%'
+        tags:
+            - { name: 'console.command' }
+
     App\Service\CardImporter:
         arguments:
             $projectDir: '%kernel.project_dir%'
